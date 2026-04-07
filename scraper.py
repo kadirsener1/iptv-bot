@@ -6,491 +6,472 @@ import logging
 from datetime import datetime
 from urllib.parse import urljoin, urlparse
 
-from seleniumwire import webdriver
+try:
+    from seleniumwire import webdriver
+    WIRE = True
+except ImportError:
+    from selenium import webdriver
+    WIRE = False
+
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from webdriver_manager.chrome import ChromeDriverManager
 from bs4 import BeautifulSoup
-import requests
 
 # ── Logging ───────────────────────────────────────────
-os.makedirs("logs", exist_ok=True)
 logging.basicConfig(
-    level=logging.INFO,
+    level=logging.DEBUG,
     format="%(asctime)s [%(levelname)s] %(message)s",
     handlers=[
-        logging.FileHandler(
-            f"logs/scraper_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log",
-            encoding="utf-8"
-        ),
+        logging.FileHandler("debug.log", encoding="utf-8"),
         logging.StreamHandler()
     ]
 )
 log = logging.getLogger(__name__)
 
-# ── Ayarlar ───────────────────────────────────────────
-TARGET_URL   = os.environ.get("TARGET_URL", "https://atomsportv494.top")
-OUTPUT_FILE  = "playlist.m3u"
-STATS_FILE   = "stats.json"
-WAIT_TIME    = 15   # Sayfa yüklenme bekleme süresi (sn)
-STREAM_WAIT  = 10   # Stream başlaması için bekleme (sn)
+TARGET_URL = "https://atomsportv494.top"
 
-# ── Chrome Ayarları ───────────────────────────────────
 def get_driver():
     options = Options()
-    options.add_argument("--headless=new")
+    # Debug için headless KAPALII - tarayıcıyı görmek için
+    # options.add_argument("--headless=new")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--disable-gpu")
     options.add_argument("--window-size=1920,1080")
     options.add_argument("--disable-blink-features=AutomationControlled")
-    options.add_argument("--disable-extensions")
+    options.add_argument("--autoplay-policy=no-user-gesture-required")
     options.add_argument("--mute-audio")
     options.add_argument(
         "--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
         "AppleWebKit/537.36 (KHTML, like Gecko) "
         "Chrome/120.0.0.0 Safari/537.36"
     )
-    options.add_experimental_option("excludeSwitches", ["enable-automation"])
+    options.add_experimental_option(
+        "excludeSwitches", ["enable-automation"]
+    )
     options.add_experimental_option("useAutomationExtension", False)
 
-    # Seleniumwire ayarları - tüm istekleri yakala
-    sw_options = {
-        "verify_ssl": False,
-        "suppress_connection_errors": True,
-    }
+    # Seleniumwire varsa kullan
+    if WIRE:
+        sw_options = {
+            "verify_ssl": False,
+            "suppress_connection_errors": True,
+            "enable_har": True,
+        }
+        from webdriver_manager.chrome import ChromeDriverManager
+        service = Service(ChromeDriverManager().install())
+        driver = webdriver.Chrome(
+            service=service,
+            options=options,
+            seleniumwire_options=sw_options
+        )
+    else:
+        from webdriver_manager.chrome import ChromeDriverManager
+        service = Service(ChromeDriverManager().install())
+        driver = webdriver.Chrome(service=service, options=options)
 
-    service = Service(ChromeDriverManager().install())
-    driver = webdriver.Chrome(
-        service=service,
-        options=options,
-        seleniumwire_options=sw_options
-    )
-
-    # Bot tespitini engelle
     driver.execute_script(
         "Object.defineProperty(navigator, 'webdriver', {get: () => undefined})"
     )
-
     return driver
 
 
-# ── Network'ten M3U8 Yakala ───────────────────────────
-def capture_m3u8_from_network(driver, wait=STREAM_WAIT):
-    """
-    Tarayıcının yaptığı tüm ağ isteklerini tarayarak
-    m3u8 URL'lerini yakalar
-    """
-    log.info(f"  ⏳ {wait} saniye network trafiği bekleniyor...")
-    time.sleep(wait)
+def analyze_page(driver, url):
+    """Sayfayı detaylı analiz et"""
+    log.info(f"\n{'='*60}")
+    log.info(f"ANALİZ: {url}")
+    log.info(f"{'='*60}")
 
-    found = set()
-
-    for request in driver.requests:
-        url = request.url
-
-        # M3U8 kontrolü
-        if ".m3u8" in url:
-            found.add(url)
-            log.info(f"  🎯 [Network] M3U8 yakalandı: {url}")
-            continue
-
-        # Response içinde m3u8 ara
-        try:
-            if request.response and request.response.body:
-                body = request.response.body.decode("utf-8", errors="ignore")
-                if ".m3u8" in body or "#EXTM3U" in body or "#EXT-X-" in body:
-                    # URL'leri çıkar
-                    urls = re.findall(
-                        r'https?://[^\s\'"<>]+\.m3u8[^\s\'"<>]*',
-                        body
-                    )
-                    for u in urls:
-                        found.add(u)
-                        log.info(f"  🎯 [Response] M3U8 bulundu: {u}")
-        except Exception:
-            pass
-
-    return found
-
-
-# ── JavaScript'ten M3U8 Çıkar ─────────────────────────
-def extract_from_js(driver):
-    """JavaScript değişkenlerinden m3u8 çıkar"""
-    found = set()
-
-    scripts = [
-        # Tüm JS kaynaklarını tara
-        "return document.documentElement.innerHTML",
-        # JWPlayer
-        "try { return JSON.stringify(jwplayer().getPlaylist()) } catch(e) { return '' }",
-        # Video.js
-        "try { return videojs.getAllPlayers()[0].src() } catch(e) { return '' }",
-        # HLS.js
-        "try { return hls.url } catch(e) { return '' }",
-        # Flowplayer
-        "try { return flowplayer().src } catch(e) { return '' }",
-        # Clappr
-        "try { return player.options.source } catch(e) { return '' }",
-        # Global değişkenler
-        """
-        try {
-            var results = [];
-            for (var key in window) {
-                try {
-                    var val = JSON.stringify(window[key]);
-                    if (val && val.includes('.m3u8')) {
-                        results.push(val);
-                    }
-                } catch(e) {}
-            }
-            return results.join('|||');
-        } catch(e) { return '' }
-        """,
-    ]
-
-    for script in scripts:
-        try:
-            result = driver.execute_script(script)
-            if result and ".m3u8" in str(result):
-                urls = re.findall(
-                    r'https?://[^\s\'"<>\\]+\.m3u8[^\s\'"<>\\]*',
-                    str(result)
-                )
-                for url in urls:
-                    url = url.strip().rstrip("\\")
-                    found.add(url)
-                    log.info(f"  🎯 [JS] M3U8 bulundu: {url}")
-        except Exception:
-            pass
-
-    return found
-
-
-# ── iframe'leri Tara ──────────────────────────────────
-def scan_iframes(driver):
-    """iframe'lere geçerek m3u8 ara"""
-    found = set()
+    results = {
+        "url": url,
+        "m3u8_found": [],
+        "iframes": [],
+        "scripts": [],
+        "network_requests": [],
+        "page_source_snippet": "",
+    }
 
     try:
-        iframes = driver.find_elements(By.TAG_NAME, "iframe")
-        log.info(f"  📦 {len(iframes)} iframe bulundu")
+        # ── 1. Sayfayı Aç ──────────────────────────────
+        if WIRE:
+            del driver.requests
 
+        driver.get(url)
+        log.info("✅ Sayfa açıldı")
+
+        # Yüklenmeyi bekle
+        WebDriverWait(driver, 15).until(
+            EC.presence_of_element_located((By.TAG_NAME, "body"))
+        )
+        time.sleep(5)
+
+        log.info(f"📄 Sayfa başlığı: {driver.title}")
+
+        # ── 2. Sayfa Kaynağını Kaydet ──────────────────
+        page_source = driver.page_source
+        with open("debug_page_source.html", "w", encoding="utf-8") as f:
+            f.write(page_source)
+        log.info("💾 Sayfa kaynağı debug_page_source.html'e kaydedildi")
+
+        # ── 3. iframe Tespiti ──────────────────────────
+        iframes = driver.find_elements(By.TAG_NAME, "iframe")
+        log.info(f"\n📦 iframe sayısı: {len(iframes)}")
+        for i, iframe in enumerate(iframes):
+            src  = iframe.get_attribute("src") or "YOK"
+            name = iframe.get_attribute("name") or ""
+            iid  = iframe.get_attribute("id") or ""
+            log.info(f"  iframe[{i}]: src={src} id={iid} name={name}")
+            results["iframes"].append({
+                "src": src, "id": iid, "name": name
+            })
+
+        # ── 4. Script Tespiti ──────────────────────────
+        scripts = driver.find_elements(By.TAG_NAME, "script")
+        log.info(f"\n📜 Script sayısı: {len(scripts)}")
+        for i, script in enumerate(scripts):
+            src     = script.get_attribute("src") or ""
+            content = script.get_attribute("innerHTML") or ""
+            if ".m3u8" in content or ".m3u8" in src:
+                log.info(f"  🎯 Script[{i}] M3U8 içeriyor!")
+                log.info(f"     src: {src}")
+                log.info(f"     içerik: {content[:200]}")
+
+        # ── 5. Video Elementleri ───────────────────────
+        videos = driver.find_elements(By.TAG_NAME, "video")
+        log.info(f"\n🎬 Video elementi sayısı: {len(videos)}")
+        for i, video in enumerate(videos):
+            src = video.get_attribute("src") or ""
+            log.info(f"  video[{i}]: src={src}")
+
+        # ── 6. Kaynak Kodu M3U8 Ara ────────────────────
+        log.info("\n🔍 Sayfa kaynağında M3U8 aranıyor...")
+        patterns = [
+            r'https?://[^\s\'"<>]+\.m3u8[^\s\'"<>]*',
+            r'["\']([^"\']*\.m3u8[^"\']*)["\']',
+        ]
+        for pat in patterns:
+            matches = re.findall(pat, page_source, re.IGNORECASE)
+            for m in matches:
+                u = m if isinstance(m, str) else m[0]
+                if u not in results["m3u8_found"]:
+                    results["m3u8_found"].append(u)
+                    log.info(f"  🎯 KAYNAK'TA BULUNDU: {u}")
+
+        # ── 7. Play Butonlarını Bul ────────────────────
+        log.info("\n▶️ Play elementleri aranıyor...")
+        play_selectors = [
+            "button", ".play", ".btn-play", "[class*='play']",
+            "[id*='play']", ".jw-icon-playback", ".vjs-play-button",
+        ]
+        for sel in play_selectors:
+            try:
+                els = driver.find_elements(By.CSS_SELECTOR, sel)
+                for el in els:
+                    if el.is_displayed():
+                        txt = el.text or el.get_attribute("class") or ""
+                        log.info(f"  Buton: {sel} → '{txt[:50]}'")
+            except Exception:
+                pass
+
+        # ── 8. Play Butonuna Tıkla ─────────────────────
+        log.info("\n▶️ Play butonuna tıklanıyor...")
+        clicked = False
+        click_selectors = [
+            ".play-button", ".btn-play", ".jw-icon-playback",
+            ".vjs-play-button", "[class*='play-btn']",
+            "[class*='play_btn']", "button.play",
+        ]
+        for sel in click_selectors:
+            try:
+                el = driver.find_element(By.CSS_SELECTOR, sel)
+                if el.is_displayed():
+                    el.click()
+                    log.info(f"  ✅ Tıklandı: {sel}")
+                    clicked = True
+                    time.sleep(3)
+                    break
+            except Exception:
+                pass
+
+        if not clicked:
+            # JS ile video oynat
+            try:
+                driver.execute_script("""
+                    document.querySelectorAll('video').forEach(v => {
+                        v.muted = true;
+                        v.play().catch(e => console.log(e));
+                    });
+                """)
+                log.info("  ✅ Video JS ile başlatıldı")
+                time.sleep(3)
+            except Exception:
+                pass
+
+        # ── 9. Network İsteklerini Yakala ──────────────
+        if WIRE:
+            log.info(f"\n🌐 Network istekleri bekleniyor (15s)...")
+            time.sleep(15)
+
+            log.info(f"\n📡 Toplam istek sayısı: {len(driver.requests)}")
+
+            for req in driver.requests:
+                req_url = req.url
+                method  = req.method
+
+                # Tüm istekleri logla (debug için)
+                if any(ext in req_url for ext in [
+                    ".m3u8", ".ts", ".mpd", "stream", "live",
+                    "hls", "chunk", "segment", "playlist"
+                ]):
+                    log.info(f"  🎯 İLGİLİ: [{method}] {req_url}")
+                    results["network_requests"].append(req_url)
+
+                    if ".m3u8" in req_url:
+                        results["m3u8_found"].append(req_url)
+                        log.info(f"  ✅ M3U8 NETWORK'TE BULUNDU: {req_url}")
+
+        # ── 10. iframe İçine Gir ───────────────────────
+        log.info("\n📦 iframe'ler taranıyor...")
         for i, iframe in enumerate(iframes):
             try:
-                src = iframe.get_attribute("src") or ""
-                log.info(f"  [iframe {i+1}] {src}")
-
                 driver.switch_to.frame(iframe)
+                log.info(f"  iframe[{i}]'e girildi")
 
-                # iframe içinde JS tara
-                found.update(extract_from_js(driver))
+                # iframe kaynağını kaydet
+                iframe_source = driver.page_source
+                with open(f"debug_iframe_{i}.html", "w",
+                          encoding="utf-8") as f:
+                    f.write(iframe_source)
+                log.info(f"  💾 debug_iframe_{i}.html kaydedildi")
 
-                # iframe network trafiği
-                found.update(capture_m3u8_from_network(driver, wait=5))
+                # iframe'de m3u8 ara
+                for pat in patterns:
+                    matches = re.findall(
+                        pat, iframe_source, re.IGNORECASE
+                    )
+                    for m in matches:
+                        u = m if isinstance(m, str) else m[0]
+                        if u not in results["m3u8_found"]:
+                            results["m3u8_found"].append(u)
+                            log.info(
+                                f"  🎯 iframe[{i}]'de M3U8: {u}"
+                            )
+
+                # iframe'de JS çalıştır
+                js_results = driver.execute_script("""
+                    var found = [];
+
+                    // Video src
+                    document.querySelectorAll('video').forEach(v => {
+                        if (v.src) found.push(v.src);
+                    });
+
+                    // innerHTML'de ara
+                    var html = document.documentElement.innerHTML;
+                    var matches = html.match(
+                        /https?:\\/\\/[^\\s'"<>]+\\.m3u8[^\\s'"<>]*/gi
+                    );
+                    if (matches) found = found.concat(matches);
+
+                    // JWPlayer
+                    try {
+                        var jw = jwplayer();
+                        if (jw) {
+                            var list = jw.getPlaylist();
+                            if (list && list[0] && list[0].file) {
+                                found.push(list[0].file);
+                            }
+                            found.push(jw.getPlaylistItem().file);
+                        }
+                    } catch(e) {}
+
+                    // Hls.js
+                    try {
+                        if (typeof Hls !== 'undefined') {
+                            for (var key in window) {
+                                try {
+                                    if (window[key] instanceof Hls) {
+                                        found.push(window[key].url);
+                                    }
+                                } catch(e) {}
+                            }
+                        }
+                    } catch(e) {}
+
+                    // Global window tarama
+                    for (var k in window) {
+                        try {
+                            var v2 = String(window[k]);
+                            if (v2.includes('.m3u8')) {
+                                var m2 = v2.match(
+                                    /https?:\\/\\/[^\\s'"]+\\.m3u8[^\\s'"]*/g
+                                );
+                                if (m2) found = found.concat(m2);
+                            }
+                        } catch(e) {}
+                    }
+
+                    return [...new Set(found)];
+                """)
+
+                if js_results:
+                    for u in js_results:
+                        if u and ".m3u8" in u:
+                            log.info(f"  🎯 iframe JS'de M3U8: {u}")
+                            results["m3u8_found"].append(u)
 
                 driver.switch_to.default_content()
 
             except Exception as e:
-                log.debug(f"  iframe hatası: {e}")
+                log.warning(f"  ❌ iframe[{i}] hatası: {e}")
                 driver.switch_to.default_content()
 
-    except Exception as e:
-        log.debug(f"  iframe tarama hatası: {e}")
-
-    return found
-
-
-# ── Video Elementlerini Bul ───────────────────────────
-def find_video_sources(driver):
-    """Video ve source elementlerinden URL çıkar"""
-    found = set()
-
-    try:
-        # <video> src
-        videos = driver.find_elements(By.TAG_NAME, "video")
-        for video in videos:
-            src = video.get_attribute("src") or ""
-            if ".m3u8" in src:
-                found.add(src)
-
-        # <source> src
-        sources = driver.find_elements(By.TAG_NAME, "source")
-        for source in sources:
-            src = source.get_attribute("src") or ""
-            if ".m3u8" in src:
-                found.add(src)
-
-    except Exception as e:
-        log.debug(f"  Video element hatası: {e}")
-
-    return found
-
-
-# ── Play Butonuna Tıkla ───────────────────────────────
-def click_play_button(driver):
-    """Oynat butonuna tıklamayı dene"""
-    play_selectors = [
-        "button.play",
-        ".play-button",
-        ".btn-play",
-        "[class*='play']",
-        "button[aria-label='Play']",
-        ".jw-icon-playback",
-        ".vjs-play-button",
-        ".fp-play",
-        "button.ytp-play-button",
-        ".plyr__control--overlaid",
-        "#play-button",
-        ".play_btn",
-    ]
-
-    for selector in play_selectors:
+        # ── 11. Tüm Window Değişkenlerini Tara ─────────
+        log.info("\n🔍 JavaScript window değişkenleri taranıyor...")
         try:
-            btn = driver.find_element(By.CSS_SELECTOR, selector)
-            if btn.is_displayed():
-                btn.click()
-                log.info(f"  ▶️ Play butonu tıklandı: {selector}")
-                time.sleep(3)
-                return True
-        except Exception:
-            pass
+            js_scan = driver.execute_script("""
+                var found = [];
+                var keys  = Object.keys(window);
+                var result = {found: [], keys: []};
 
-    # JavaScript ile tıkla
-    try:
-        driver.execute_script("""
-            var videos = document.querySelectorAll('video');
-            for (var v of videos) {
-                v.play();
-            }
-        """)
-        log.info("  ▶️ Video JS ile başlatıldı")
-        time.sleep(3)
-        return True
-    except Exception:
-        pass
+                for (var i = 0; i < keys.length; i++) {
+                    var key = keys[i];
+                    try {
+                        var val = JSON.stringify(window[key]);
+                        if (val && val.includes('.m3u8')) {
+                            result.found.push({key: key, val: val});
+                        }
+                    } catch(e) {}
+                }
 
-    return False
+                // localStorage
+                try {
+                    for (var j = 0; j < localStorage.length; j++) {
+                        var k  = localStorage.key(j);
+                        var v3 = localStorage.getItem(k);
+                        if (v3 && v3.includes('.m3u8')) {
+                            result.found.push({
+                                key: 'localStorage:' + k,
+                                val: v3
+                            });
+                        }
+                    }
+                } catch(e) {}
 
+                return result;
+            """)
 
-# ── Ana Sayfadaki Kanal Linklerini Al ────────────────
-def get_channel_links(driver):
-    """Ana sayfadan tüm kanal linklerini çek"""
-    log.info(f"🌐 Ana sayfa açılıyor: {TARGET_URL}")
-    driver.get(TARGET_URL)
+            if js_scan and js_scan.get("found"):
+                for item in js_scan["found"]:
+                    log.info(
+                        f"  🎯 JS Değişken: {item['key']} → "
+                        f"{item['val'][:100]}"
+                    )
+                    urls = re.findall(
+                        r'https?://[^\s\'"\\]+\.m3u8[^\s\'"\\]*',
+                        item["val"]
+                    )
+                    results["m3u8_found"].extend(urls)
 
-    try:
-        WebDriverWait(driver, WAIT_TIME).until(
-            EC.presence_of_element_located((By.TAG_NAME, "body"))
-        )
-    except Exception:
-        pass
+        except Exception as e:
+            log.warning(f"  JS tarama hatası: {e}")
 
-    time.sleep(5)
+        # ── 12. Cookies & Headers Kaydet ───────────────
+        cookies = driver.get_cookies()
+        with open("debug_cookies.json", "w", encoding="utf-8") as f:
+            json.dump(cookies, f, ensure_ascii=False, indent=2)
+        log.info(f"\n🍪 Cookies kaydedildi ({len(cookies)} adet)")
 
-    # Sayfayı aşağı kaydır - lazy load için
-    driver.execute_script("window.scrollTo(0, document.body.scrollHeight)")
-    time.sleep(2)
-    driver.execute_script("window.scrollTo(0, 0)")
-    time.sleep(1)
-
-    soup = BeautifulSoup(driver.page_source, "html.parser")
-    links = set()
-
-    for a in soup.find_all("a", href=True):
-        href = a["href"]
-        full_url = urljoin(TARGET_URL, href)
-
-        parsed = urlparse(full_url)
-        target_parsed = urlparse(TARGET_URL)
-
-        if parsed.netloc == target_parsed.netloc:
-            if full_url != TARGET_URL and not any(
-                full_url.endswith(ext)
-                for ext in [".jpg", ".png", ".gif", ".css", ".js", ".ico", ".xml"]
-            ):
-                links.add(full_url)
-
-    # Ana sayfayı da ekle
-    links.add(TARGET_URL)
-
-    log.info(f"📋 Toplam {len(links)} link bulundu")
-    return list(links)
-
-
-# ── Tek Kanal Tara ────────────────────────────────────
-def scrape_channel(driver, url):
-    """Bir kanal sayfasını tara ve m3u8 bul"""
-    log.info(f"\n{'='*50}")
-    log.info(f"🔍 Taranıyor: {url}")
-    log.info(f"{'='*50}")
-
-    found = set()
-
-    try:
-        # Önceki istekleri temizle
-        del driver.requests
-
-        # Sayfayı aç
-        driver.get(url)
-
-        # Sayfa yüklensin
-        try:
-            WebDriverWait(driver, WAIT_TIME).until(
-                EC.presence_of_element_located((By.TAG_NAME, "body"))
-            )
-        except Exception:
-            pass
-
-        time.sleep(3)
-
-        # 1. Play butonuna tıkla
-        click_play_button(driver)
-
-        # 2. Network trafiğini izle
-        network_urls = capture_m3u8_from_network(driver, STREAM_WAIT)
-        found.update(network_urls)
-
-        # 3. JavaScript'ten çıkar
-        js_urls = extract_from_js(driver)
-        found.update(js_urls)
-
-        # 4. iframe'leri tara
-        iframe_urls = scan_iframes(driver)
-        found.update(iframe_urls)
-
-        # 5. Video elementlerini tara
-        video_urls = find_video_sources(driver)
-        found.update(video_urls)
-
-        # 6. Sayfa kaynağını tara
-        page_source = driver.page_source
-        source_urls = re.findall(
-            r'https?://[^\s\'"<>\\]+\.m3u8[^\s\'"<>\\]*',
-            page_source,
-            re.IGNORECASE
-        )
-        for u in source_urls:
-            found.add(u.strip())
-
-        # Kanal adını al
-        try:
-            title = driver.title or url
-            channel_name = title.strip()[:60]
-        except Exception:
-            channel_name = urlparse(url).path.strip("/").replace("/", "_")
-
-        if found:
-            log.info(f"✅ {len(found)} M3U8 bulundu!")
-            return channel_name, list(found)
-        else:
-            log.info("❌ M3U8 bulunamadı")
-            return channel_name, []
+        # ── 13. Screenshot Al ──────────────────────────
+        driver.save_screenshot("debug_screenshot.png")
+        log.info("📸 Ekran görüntüsü: debug_screenshot.png")
 
     except Exception as e:
-        log.error(f"❌ Hata: {e}")
-        return "Hata", []
+        log.error(f"❌ Analiz hatası: {e}", exc_info=True)
+
+    return results
 
 
-# ── M3U Oluştur ───────────────────────────────────────
-def create_m3u(channels_data):
-    now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    lines = [
-        "#EXTM3U\n",
-        f"# Güncelleme: {now} UTC\n",
-        f"# Toplam: {len(channels_data)} kanal\n",
-        "\n"
-    ]
-
-    for item in channels_data:
-        name  = item["name"]
-        url   = item["url"]
-        group = item.get("group", "Genel")
-        logo  = item.get("logo", "")
-
-        extinf  = f'#EXTINF:-1'
-        extinf += f' tvg-name="{name}"'
-        if logo:
-            extinf += f' tvg-logo="{logo}"'
-        extinf += f' group-title="{group}"'
-        extinf += f',{name}\n'
-
-        lines.append(extinf)
-        lines.append(f"{url}\n\n")
-
-    return "".join(lines)
-
-
-# ── Ana Fonksiyon ─────────────────────────────────────
 def main():
-    log.info("🚀 Scraper başlatılıyor...")
-    start = time.time()
+    log.info("🚀 Debug Scraper Başlatılıyor...")
+    log.info(f"🌐 Hedef: {TARGET_URL}")
+    log.info(f"🔌 SeleniumWire: {'AÇIK' if WIRE else 'KAPALI'}")
 
     driver = get_driver()
-    all_channels = []
+    all_results = []
 
     try:
-        # Kanal linklerini al
-        channel_links = get_channel_links(driver)
-        log.info(f"\n📺 {len(channel_links)} kanal taranacak\n")
+        # ── Ana Sayfayı Analiz Et ──────────────────────
+        result = analyze_page(driver, TARGET_URL)
+        all_results.append(result)
 
-        for i, link in enumerate(channel_links, 1):
-            log.info(f"\n[{i}/{len(channel_links)}]")
+        # ── Kanal Linklerini Bul ───────────────────────
+        soup = BeautifulSoup(driver.page_source, "html.parser")
+        links = set()
 
-            name, m3u8_urls = scrape_channel(driver, link)
+        for a in soup.find_all("a", href=True):
+            href     = a["href"]
+            full_url = urljoin(TARGET_URL, href)
+            parsed   = urlparse(full_url)
+            target   = urlparse(TARGET_URL)
 
-            for j, m3u8 in enumerate(m3u8_urls):
-                ch_name = name if len(m3u8_urls) == 1 else f"{name} {j+1}"
+            if parsed.netloc == target.netloc:
+                if not any(full_url.endswith(x) for x in [
+                    ".jpg", ".png", ".css", ".js", ".ico"
+                ]):
+                    links.add(full_url)
 
-                # Duplicate kontrolü
-                existing = [c["url"] for c in all_channels]
-                if m3u8 not in existing:
-                    all_channels.append({
-                        "name": ch_name,
-                        "url": m3u8,
-                        "group": "Spor",
-                        "logo": ""
-                    })
+        log.info(f"\n📋 {len(links)} kanal linki bulundu:")
+        for lnk in list(links)[:5]:
+            log.info(f"  → {lnk}")
 
+        # ── İlk 3 Kanalı Analiz Et ────────────────────
+        for url in list(links)[:3]:
+            result = analyze_page(driver, url)
+            all_results.append(result)
             time.sleep(2)
 
+        # ── Sonuçları Kaydet ───────────────────────────
+        with open("debug_results.json", "w", encoding="utf-8") as f:
+            json.dump(all_results, f, ensure_ascii=False, indent=2)
+
+        # ── Özet ──────────────────────────────────────
+        log.info(f"\n{'='*60}")
+        log.info("📊 ÖZET")
+        log.info(f"{'='*60}")
+
+        all_m3u8 = []
+        for r in all_results:
+            for u in r["m3u8_found"]:
+                if u not in all_m3u8:
+                    all_m3u8.append(u)
+
+        if all_m3u8:
+            log.info(f"✅ Toplam {len(all_m3u8)} M3U8 bulundu!")
+            for u in all_m3u8:
+                log.info(f"  → {u}")
+        else:
+            log.warning("❌ HİÇ M3U8 BULUNAMADI!")
+            log.info("\n💡 Öneriler:")
+            log.info("  1. debug_screenshot.png'ye bak - site açıldı mı?")
+            log.info("  2. debug_page_source.html'e bak - içerik var mı?")
+            log.info("  3. debug.log'a bak - hata var mı?")
+            log.info("  4. Site CloudFlare arkasında olabilir")
+            log.info("  5. Site farklı bir player kullanıyor olabilir")
+
+        log.info(f"\n📁 Oluşturulan dosyalar:")
+        log.info("  → debug.log")
+        log.info("  → debug_page_source.html")
+        log.info("  → debug_screenshot.png")
+        log.info("  → debug_cookies.json")
+        log.info("  → debug_results.json")
+
     finally:
+        input("\n⏸️ Tarayıcıyı kapatmak için Enter'a bas...")
         driver.quit()
-
-    # Sonuçlar
-    elapsed = round(time.time() - start, 1)
-    log.info(f"\n{'='*50}")
-    log.info(f"🏁 Tamamlandı!")
-    log.info(f"📺 Toplam kanal: {len(all_channels)}")
-    log.info(f"⏱️ Süre: {elapsed}s")
-    log.info(f"{'='*50}")
-
-    if all_channels:
-        # M3U kaydet
-        content = create_m3u(all_channels)
-        with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
-            f.write(content)
-        log.info(f"✅ {OUTPUT_FILE} kaydedildi")
-
-        # Stats kaydet
-        stats = {
-            "last_update": datetime.now().isoformat(),
-            "total": len(all_channels),
-            "duration_sec": elapsed,
-            "channels": all_channels
-        }
-        with open(STATS_FILE, "w", encoding="utf-8") as f:
-            json.dump(stats, f, ensure_ascii=False, indent=2)
-        log.info(f"✅ {STATS_FILE} kaydedildi")
-
-    else:
-        log.warning("⚠️ Hiç M3U8 bulunamadı!")
-        if not os.path.exists(OUTPUT_FILE):
-            with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
-                f.write("#EXTM3U\n# Kanal bulunamadı\n")
 
 
 if __name__ == "__main__":
