@@ -1,11 +1,139 @@
-#EXTM3U
+#EXTM3U url-tvg="https://raw.githubusercontent.com/username/repo/main/epg.xml" tvg-shift="+3" x-tvg-url="https://raw.githubusercontent.com/username/repo/main/epg.xml"
+# ============================================
+# 📺 TÜRK CANLI YAYIN LİSTESİ
+# 🔄 Son Güncelleme: 2024-01-15 12:00:00 UTC
+# 📊 Toplam Kanal: 30
+# 👤 Yapımcı: GitHub Actions Bot
+# ============================================
 
-#EXTINF:-1 tvg-id="bein-sports-1", bein-sports-1
-#EXTVLCOPT:http-referrer=https://atomsportv494.top
-https://atomsportv494.top/matches?id=bein-sports-1
+# ════════════════════════════════════════════
+#             📡 ULUSAL KANALLAR
+# ════════════════════════════════════════════
 
-#EXTINF:-1 tvg-id="bein-sports-2", Bein Sports 2
-http://test.m3u8
+#EXTINF:-1 tvg-id="trt1.tr" tvg-name="TRT 1" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/TRT_1_logo_%282021%29.svg/1200px-TRT_1_logo_%282021%29.svg.png" group-title="📡 Ulusal",TRT 1
+http://ornek-stream.com/trt1/index.m3u8
 
-#EXTINF:-1 tvg-id="s-sport", S Sport
-http://test.m3u8
+#EXTINF:-1 tvg-id="trt2.tr" tvg-name="TRT 2" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/TRT_2_logo_%282021%29.svg/1200px-TRT_2_logo_%282021%29.svg.png" group-title="📡 Ulusal",TRT 2
+http://ornek-stream.com/trt2/index.m3u8
+
+#EXTINF:-1 tvg-id="show.tr" tvg-name="Show TV" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Show_TV_logo.svg/1200px-Show_TV_logo.svg.png" group-title="📡 Ulusal",Show TV
+http://ornek-stream.com/showtv/index.m3u8
+
+#EXTINF:-1 tvg-id="kanal7.tr" tvg-name="Kanal 7" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kanal_7_logo.svg/1200px-Kanal_7_logo.svg.png" group-title="📡 Ulusal",Kanal 7
+http://ornek-stream.com/kanal7/index.m3u8
+
+#EXTINF:-1 tvg-id="atv.tr" tvg-name="ATV" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/ATV_Turkey_logo.svg/1200px-ATV_Turkey_logo.svg.png" group-title="📡 Ulusal",ATV
+http://ornek-stream.com/atv/index.m3u8
+
+#EXTINF:-1 tvg-id="star.tr" tvg-name="Star TV" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Star_TV_logo.svg/1200px-Star_TV_logo.svg.png" group-title="📡 Ulusal",Star TV
+http://ornek-stream.com/startv/index.m3u8
+
+#EXTINF:-1 tvg-id="fox.tr" tvg-name="FOX TV" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/FOX_TV_Turkey_logo.svg/1200px-FOX_TV_Turkey_logo.svg.png" group-title="📡 Ulusal",FOX TV
+http://ornek-stream.com/foxtv/index.m3u8
+
+#EXTINF:-1 tvg-id="tv8.tr" tvg-name="TV8" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/TV8_logo.svg/1200px-TV8_logo.svg.png" group-title="📡 Ulusal",TV8
+http://ornek-stream.com/tv8/index.m3u8
+
+# ════════════════════════════════════════════
+#              ⚽ SPOR KANALLARI
+# ════════════════════════════════════════════
+
+#EXTINF:-1 tvg-id="bein-sports-1" tvg-name="beIN Sports 1" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/BeIN_Sports_1_TR.svg/1200px-BeIN_Sports_1_TR.svg.png" group-title="⚽ Spor",beIN Sports 1
+http://ornek-stream.com/beinsports1/index.m3u8
+
+#EXTINF:-1 tvg-id="bein-sports-2" tvg-name="beIN Sports 2" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/BeIN_Sports_2_TR.svg/1200px-BeIN_Sports_2_TR.svg.png" group-title="⚽ Spor",beIN Sports 2
+http://ornek-stream.com/beinsports2/index.m3u8
+
+#EXTINF:-1 tvg-id="beinsport3.tr" tvg-name="beIN Sports 3" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/BeIN_Sports_3_TR.svg/1200px-BeIN_Sports_3_TR.svg.png" group-title="⚽ Spor",beIN Sports 3
+http://ornek-stream.com/beinsports3/index.m3u8
+
+#EXTINF:-1 tvg-id="trtsport.tr" tvg-name="TRT Spor" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/TRT_Spor_logo.svg/1200px-TRT_Spor_logo.svg.png" group-title="⚽ Spor",TRT Spor
+http://ornek-stream.com/trtspor/index.m3u8
+
+#EXTINF:-1 tvg-id="trtsport2.tr" tvg-name="TRT Spor 2" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/TRT_Spor_2_logo.svg/1200px-TRT_Spor_2_logo.svg.png" group-title="⚽ Spor",TRT Spor 2
+http://ornek-stream.com/trtspor2/index.m3u8
+
+#EXTINF:-1 tvg-id="ssport1.tr" tvg-name="S Sport" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/S_Sport_logo.svg/1200px-S_Sport_logo.svg.png" group-title="⚽ Spor",S Sport
+http://ornek-stream.com/ssport/index.m3u8
+
+#EXTINF:-1 tvg-id="ssport2.tr" tvg-name="S Sport 2" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/S_Sport_2_logo.svg/1200px-S_Sport_2_logo.svg.png" group-title="⚽ Spor",S Sport 2
+http://ornek-stream.com/ssport2/index.m3u8
+
+# ════════════════════════════════════════════
+#              📰 HABER KANALLARI
+# ════════════════════════════════════════════
+
+#EXTINF:-1 tvg-id="cnnturk.tr" tvg-name="CNN Türk" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/CNN_Turk_logo.svg/1200px-CNN_Turk_logo.svg.png" group-title="📰 Haber",CNN Türk
+http://ornek-stream.com/cnnturk/index.m3u8
+
+#EXTINF:-1 tvg-id="haberturk.tr" tvg-name="Haber Türk" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Haberturk_logo.svg/1200px-Haberturk_logo.svg.png" group-title="📰 Haber",Haber Türk
+http://ornek-stream.com/haberturk/index.m3u8
+
+#EXTINF:-1 tvg-id="ntv.tr" tvg-name="NTV" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/NTV_logo.svg/1200px-NTV_logo.svg.png" group-title="📰 Haber",NTV
+http://ornek-stream.com/ntv/index.m3u8
+
+#EXTINF:-1 tvg-id="trtworld.tr" tvg-name="TRT World" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/TRT_World_logo.svg/1200px-TRT_World_logo.svg.png" group-title="📰 Haber",TRT World
+http://ornek-stream.com/trtworld/index.m3u8
+
+#EXTINF:-1 tvg-id="a-haber.tr" tvg-name="A Haber" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/A_Haber_logo.svg/1200px-A_Haber_logo.svg.png" group-title="📰 Haber",A Haber
+http://ornek-stream.com/ahaber/index.m3u8
+
+# ════════════════════════════════════════════
+#              🎬 SİNEMA KANALLARI
+# ════════════════════════════════════════════
+
+#EXTINF:-1 tvg-id="sinematr.tr" tvg-name="Sinema TR" tvg-logo="https://i.imgur.com/sinematr.png" group-title="🎬 Sinema",Sinema TR
+http://ornek-stream.com/sinematr/index.m3u8
+
+#EXTINF:-1 tvg-id="actionmax.tr" tvg-name="Action Max" tvg-logo="https://i.imgur.com/actionmax.png" group-title="🎬 Sinema",Action Max
+http://ornek-stream.com/actionmax/index.m3u8
+
+#EXTINF:-1 tvg-id="filmbox.tr" tvg-name="FilmBox" tvg-logo="https://i.imgur.com/filmbox.png" group-title="🎬 Sinema",FilmBox
+http://ornek-stream.com/filmbox/index.m3u8
+
+# ════════════════════════════════════════════
+#              🧒 ÇOCUK KANALLARI
+# ════════════════════════════════════════════
+
+#EXTINF:-1 tvg-id="trtcocuk.tr" tvg-name="TRT Çocuk" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/TRT_Cocuk_logo.svg/1200px-TRT_Cocuk_logo.svg.png" group-title="🧒 Çocuk",TRT Çocuk
+http://ornek-stream.com/trtcocuk/index.m3u8
+
+#EXTINF:-1 tvg-id="cartoon.tr" tvg-name="Cartoon Network" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Cartoon_Network_logo.svg/1200px-Cartoon_Network_logo.svg.png" group-title="🧒 Çocuk",Cartoon Network
+http://ornek-stream.com/cartoonnetwork/index.m3u8
+
+#EXTINF:-1 tvg-id="disney.tr" tvg-name="Disney Channel" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Disney_Channel_logo.svg/1200px-Disney_Channel_logo.svg.png" group-title="🧒 Çocuk",Disney Channel
+http://ornek-stream.com/disneychannel/index.m3u8
+
+# ════════════════════════════════════════════
+#              🌍 ULUSLARARASI KANALLAR
+# ════════════════════════════════════════════
+
+#EXTINF:-1 tvg-id="bbcworld.uk" tvg-name="BBC World" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/BBC_World_News_logo.svg/1200px-BBC_World_News_logo.svg.png" group-title="🌍 Uluslararası",BBC World
+http://ornek-stream.com/bbcworld/index.m3u8
+
+#EXTINF:-1 tvg-id="aljazeera.qa" tvg-name="Al Jazeera" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Al_Jazeera_logo.svg/1200px-Al_Jazeera_logo.svg.png" group-title="🌍 Uluslararası",Al Jazeera
+http://ornek-stream.com/aljazeera/index.m3u8
+
+#EXTINF:-1 tvg-id="euronews.eu" tvg-name="Euronews TR" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Euronews_logo.svg/1200px-Euronews_logo.svg.png" group-title="🌍 Uluslararası",Euronews TR
+http://ornek-stream.com/euronews/index.m3u8
+
+#EXTINF:-1 tvg-id="dw.de" tvg-name="DW Türkçe" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/DW_logo.svg/1200px-DW_logo.svg.png" group-title="🌍 Uluslararası",DW Türkçe
+http://ornek-stream.com/dwturkce/index.m3u8
+
+# ════════════════════════════════════════════
+#              🎵 MÜZİK KANALLARI
+# ════════════════════════════════════════════
+
+#EXTINF:-1 tvg-id="powertv.tr" tvg-name="Power TV" tvg-logo="https://i.imgur.com/powertv.png" group-title="🎵 Müzik",Power TV
+http://ornek-stream.com/powertv/index.m3u8
+
+#EXTINF:-1 tvg-id="kral.tr" tvg-name="Kral TV" tvg-logo="https://i.imgur.com/kraltv.png" group-title="🎵 Müzik",Kral TV
+http://ornek-stream.com/kraltv/index.m3u8
+
+#EXTINF:-1 tvg-id="kralpop.tr" tvg-name="Kral Pop" tvg-logo="https://i.imgur.com/kralpop.png" group-title="🎵 Müzik",Kral Pop
+http://ornek-stream.com/kralpop/index.m3u8
+
+# ════════════════════════════════════════════
+# SON GÜNCELLEME: 2024-01-15 12:00:00 UTC
+# TOPLAM KANAL: 33
+# ════════════════════════════════════════════
