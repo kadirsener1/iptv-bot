@@ -10,6 +10,7 @@ import requests
 
 # ── Logging EN BAŞTA ──────────────────────────────────
 os.makedirs("logs", exist_ok=True)
+
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(message)s",
@@ -24,13 +25,18 @@ logging.basicConfig(
 log = logging.getLogger(__name__)
 
 # ── Ayarlar ───────────────────────────────────────────
-TARGET_URL   = os.environ.get("TARGET_URL", "https://atomsportv494.top")
+TARGET_URL = os.environ.get("TARGET_URL", "").strip()
+if not TARGET_URL:
+    TARGET_URL = "https://atomsportv494.top"
+
 OUTPUT_FILE  = "playlist.m3u"
 STATS_FILE   = "stats.json"
 CHROMEDRIVER = os.environ.get("CHROMEDRIVER_PATH", "/usr/local/bin/chromedriver")
 CHROME_BIN   = os.environ.get("CHROME_BIN", "/usr/local/bin/google-chrome")
 PAGE_WAIT    = 15
 STREAM_WAIT  = 15
+
+log.info(f"🎯 Hedef URL: {TARGET_URL}")
 
 # ── Selenium ──────────────────────────────────────────
 try:
@@ -54,7 +60,7 @@ from selenium.webdriver.support import expected_conditions as EC
 # ═══════════════════════════════════════════════════════
 def get_driver():
     log.info(f"🔧 Driver başlatılıyor...")
-    log.info(f"   Chrome     : {CHROME_BIN}")
+    log.info(f"   Chrome      : {CHROME_BIN}")
     log.info(f"   ChromeDriver: {CHROMEDRIVER}")
 
     options = Options()
@@ -106,7 +112,7 @@ def get_driver():
 
 
 # ═══════════════════════════════════════════════════════
-#  M3U8 ÇIKARMA
+#  M3U8 ÇIKARMA - SADECE .m3u8 filtresi
 # ═══════════════════════════════════════════════════════
 M3U8_PATTERNS = [
     r'https?://[^\s\'"<>()\[\]{}\\]+\.m3u8(?:\?[^\s\'"<>()\[\]{}\\]*)?',
@@ -129,6 +135,9 @@ def extract_m3u8(text, base_url=""):
             for match in matches:
                 url = (match if isinstance(match, str) else match[0]).strip().strip("'\"")
                 if not url or len(url) < 15:
+                    continue
+                # SADECE .m3u8 içerenleri al
+                if ".m3u8" not in url.lower():
                     continue
                 if url.startswith("http"):
                     found.add(url)
@@ -153,14 +162,16 @@ def decode_base64(text):
         for match in re.findall(pattern, text):
             try:
                 decoded = base64.b64decode(match).decode("utf-8", errors="ignore")
-                found.update(extract_m3u8(decoded))
+                # Sadece m3u8 içeriyorsa ekle
+                if ".m3u8" in decoded.lower():
+                    found.update(extract_m3u8(decoded))
             except Exception:
                 pass
     return found
 
 
 # ═══════════════════════════════════════════════════════
-#  NETWORK YAKALAMA
+#  NETWORK YAKALAMA - SADECE .m3u8
 # ═══════════════════════════════════════════════════════
 def capture_network(driver, wait=STREAM_WAIT):
     if not WIRE:
@@ -176,20 +187,22 @@ def capture_network(driver, wait=STREAM_WAIT):
     for req in driver.requests:
         url = req.url
 
-        if ".m3u8" in url:
+        # SADECE .m3u8 içeren URL'leri al
+        if ".m3u8" in url.lower():
             found.add(url)
-            log.info(f"  🎯 [Network] {url}")
+            log.info(f"  🎯 [NET] {url}")
             continue
 
-        # Response body tara
+        # Response body'de sadece gerçek m3u8 içeriği ara
         try:
             if req.response and req.response.body:
                 body = req.response.body.decode("utf-8", errors="ignore")
-                if ".m3u8" in body:
+                if "#EXTM3U" in body or "#EXT-X-" in body:
                     urls = extract_m3u8(body)
                     for u in urls:
-                        found.add(u)
-                        log.info(f"  🎯 [Response Body] {u}")
+                        if ".m3u8" in u.lower():
+                            found.add(u)
+                            log.info(f"  🎯 [BODY] {u}")
         except Exception:
             pass
 
@@ -224,17 +237,17 @@ JS_SCRIPT = """
             var jw = jwplayer();
             if (jw.getPlaylist) {
                 jw.getPlaylist().forEach(function(item) {
-                    if (item.file) found.push(item.file);
+                    if (item.file && item.file.includes('.m3u8')) found.push(item.file);
                     if (item.sources) {
                         item.sources.forEach(function(s) {
-                            if (s.file) found.push(s.file);
+                            if (s.file && s.file.includes('.m3u8')) found.push(s.file);
                         });
                     }
                 });
             }
             try {
                 var curr = jw.getPlaylistItem();
-                if (curr && curr.file) found.push(curr.file);
+                if (curr && curr.file && curr.file.includes('.m3u8')) found.push(curr.file);
             } catch(e2) {}
         }
     } catch(e) {}
@@ -305,7 +318,7 @@ def scan_js(driver):
         results = driver.execute_script(JS_SCRIPT)
         if results:
             for url in results:
-                if url and ".m3u8" in url:
+                if url and ".m3u8" in url.lower():
                     found.add(url)
                     log.info(f"  🎯 [JS] {url}")
     except Exception as e:
@@ -334,15 +347,12 @@ def scan_iframes(driver, base_url, depth=2):
                 driver.switch_to.frame(iframe)
                 time.sleep(2)
 
-                # JS tara
                 found.update(scan_js(driver))
 
-                # Kaynak tara
                 src_html = driver.page_source
                 found.update(extract_m3u8(src_html, base_url))
                 found.update(decode_base64(src_html))
 
-                # Nested
                 if depth > 1:
                     found.update(scan_iframes(driver, base_url, depth - 1))
 
@@ -404,10 +414,9 @@ def click_play(driver):
 
 
 # ═══════════════════════════════════════════════════════
-#  REQUESTS İLE TARAMA (Selenium olmadan)
+#  REQUESTS FALLBACK
 # ═══════════════════════════════════════════════════════
 def scrape_with_requests(url):
-    """Selenium bulamazsa requests ile dene"""
     found = set()
     headers = {
         "User-Agent": (
@@ -419,14 +428,14 @@ def scrape_with_requests(url):
     }
     try:
         resp = requests.get(url, headers=headers, timeout=15)
-        found.update(extract_m3u8(resp.text, url))
+        urls = extract_m3u8(resp.text, url)
+        found.update(urls)
         found.update(decode_base64(resp.text))
 
-        # Script src'lerini de çek
         soup = BeautifulSoup(resp.text, "html.parser")
         for script in soup.find_all("script", src=True):
             try:
-                s_url = urljoin(url, script["src"])
+                s_url  = urljoin(url, script["src"])
                 s_resp = requests.get(s_url, headers=headers, timeout=10)
                 found.update(extract_m3u8(s_resp.text, url))
             except Exception:
@@ -512,7 +521,7 @@ def scrape_channel(driver, url):
         # Play
         click_play(driver)
 
-        # 1. Network (wire)
+        # 1. Network
         if WIRE:
             found.update(capture_network(driver, STREAM_WAIT))
 
@@ -531,7 +540,7 @@ def scrape_channel(driver, url):
         soup = BeautifulSoup(page, "html.parser")
         for tag in soup.find_all("script"):
             c = tag.string or ""
-            if c:
+            if c and ".m3u8" in c.lower():
                 found.update(extract_m3u8(c, url))
                 found.update(decode_base64(c))
 
@@ -545,11 +554,7 @@ def scrape_channel(driver, url):
         except Exception:
             name = urlparse(url).path.strip("/").replace("/", "_") or "Kanal"
 
-        if found:
-            log.info(f"  ✅ {len(found)} M3U8 bulundu")
-        else:
-            log.info(f"  ❌ Bulunamadı")
-
+        log.info(f"  {'✅' if found else '❌'} {len(found)} M3U8")
         return name, list(found)
 
     except Exception as e:
@@ -574,6 +579,10 @@ def create_m3u(channels):
         logo  = ch.get("logo", "")
 
         if not url:
+            continue
+
+        # Sadece m3u8 yaz
+        if ".m3u8" not in url.lower():
             continue
 
         extinf = f'#EXTINF:-1 tvg-name="{name}"'
@@ -614,6 +623,9 @@ def main():
             name, m3u8_list = scrape_channel(driver, link)
 
             for j, m3u8 in enumerate(m3u8_list, 1):
+                # Sadece .m3u8 ekle
+                if ".m3u8" not in m3u8.lower():
+                    continue
                 if m3u8 in seen:
                     continue
                 seen.add(m3u8)
@@ -625,6 +637,7 @@ def main():
                     "group": "Spor",
                     "logo" : ""
                 })
+                log.info(f"  ✅ Eklendi: {m3u8}")
 
             time.sleep(2)
 
@@ -639,7 +652,6 @@ def main():
             except Exception:
                 pass
 
-    # Sonuç
     elapsed = round(time.time() - start, 1)
     log.info(f"\n{'='*55}")
     log.info(f"🏁 Tamamlandı!")
@@ -647,7 +659,6 @@ def main():
     log.info(f"⏱️  Süre   : {elapsed}s")
     log.info(f"{'='*55}")
 
-    # Kaydet
     content = create_m3u(channels)
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         f.write(content)
