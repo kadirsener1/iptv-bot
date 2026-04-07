@@ -1,0 +1,33 @@
+name: IPTV Update
+
+on:
+  schedule:
+    - cron: "0 * * * *"   # Her saat çalışır
+  workflow_dispatch:      # Elle çalıştırma
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Repo çek
+        uses: actions/checkout@v3
+
+      - name: Python kur
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.10
+
+      - name: Kütüphane yükle
+        run: pip install requests
+
+      - name: Script çalıştır
+        run: python update.py
+
+      - name: Değişiklikleri kaydet
+        run: |
+          git config --global user.name "bot"
+          git config --global user.email "bot@github.com"
+          git add .
+          git commit -m "Auto update M3U" || echo "No changes"
+          git push
