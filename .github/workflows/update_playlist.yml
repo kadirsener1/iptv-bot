@@ -1,81 +1,324 @@
 name: 🔄 M3U8 Playlist Güncelle
 
 on:
+  # Her 6 saatte bir çalış
   schedule:
     - cron: '0 */6 * * *'
+  
+  # Manuel tetikleme
   workflow_dispatch:
+    inputs:
+      debug_mode:
+        description: 'Debug modu açık mı?'
+        required: false
+        default: 'false'
+        type: boolean
+      force_update:
+        description: 'Zorla güncelle'
+        required: false
+        default: 'false'
+        type: boolean
+
+  # scraper.py değişince çalış
+  push:
+    branches:
+      - main
+    paths:
+      - 'scraper.py'
+      - 'requirements.txt'
 
 jobs:
-  update:
+  # ════════════════════════════════════════════
+  #           SCRAPER JOB
+  # ════════════════════════════════════════════
+  scrape:
+    name: 📺 M3U8 Tara & Güncelle
     runs-on: ubuntu-latest
+
     permissions:
       contents: write
 
     steps:
+      # ── 1. Repo Klonla ──────────────────────────────
       - name: 📥 Checkout
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
 
-      - name: 🐍 Python Kur
+      # ── 2. Python Kur ────────────────────────────────
+      - name: 🐍 Python 3.11 Kur
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
           cache: 'pip'
 
-      # Chrome kur
-      - name: 🌐 Chrome Kur
-        uses: browser-actions/setup-chrome@v1
-        with:
-          chrome-version: stable
-
-      # ChromeDriver kur
-      - name: 🔧 ChromeDriver Kur
-        uses: nanasess/setup-chromedriver@v2
-
-      - name: 📦 Bağımlılıkları Yükle
+      # ── 3. Sistem Bağımlılıkları ─────────────────────
+      - name: 🔧 Sistem Bağımlılıkları Kur
         run: |
-          pip install --upgrade pip
-          pip install -r requirements.txt
+          sudo apt-get update -qq
+          sudo apt-get install -y \
+            wget \
+            curl \
+            unzip \
+            xvfb \
+            libxi6 \
+            libgconf-2-4 \
+            libxss1 \
+            libappindicator1 \
+            libindicator7 \
+            libasound2 \
+            libatk-bridge2.0-0 \
+            libgtk-3-0 \
+            libx11-xcb1 \
+            libxcb-dri3-0 \
+            libdrm2 \
+            libgbm1 \
+            fonts-liberation \
+            xdg-utils \
+            ca-certificates \
+            --no-install-recommends
 
+      # ── 4. Chrome Kur ────────────────────────────────
+      - name: 🌐 Google Chrome Kur
+        run: |
+          wget -q -O - https://dl.google.com/linux/linux_signing_key.pub \
+            | sudo gpg --dearmor -o /usr/share/keyrings/google-chrome.gpg
+          echo "deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] \
+            http://dl.google.com/linux/chrome/deb/ stable main" \
+            | sudo tee /etc/apt/sources.list.d/google-chrome.list
+          sudo apt-get update -qq
+          sudo apt-get install -y google-chrome-stable
+          google-chrome --version
+
+      # ── 5. ChromeDriver Kur ──────────────────────────
+      - name: 🔧 ChromeDriver Kur
+        run: |
+          # Chrome versiyonunu al
+          CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+\.\d+')
+          CHROME_MAJOR=$(echo $CHROME_VERSION | cut -d. -f1)
+          echo "Chrome Versiyonu: $CHROME_VERSION"
+          echo "Chrome Major: $CHROME_MAJOR"
+
+          # ChromeDriver indir
+          if [ "$CHROME_MAJOR" -ge 115 ]; then
+            # Yeni Chrome için (115+)
+            DRIVER_URL=$(curl -s \
+              "https://googlechromelabs.github.io/chrome-for-testing/known-good-versions-with-downloads.json" \
+              | python3 -c "
+          import sys, json
+          data = json.load(sys.stdin)
+          versions = data['versions']
+          chrome_ver = '$CHROME_VERSION'
+          for v in reversed(versions):
+              if v['version'] == chrome_ver:
+                  for dl in v['downloads'].get('chromedriver', []):
+                      if dl['platform'] == 'linux64':
+                          print(dl['url'])
+                          break
+                  break
+          " 2>/dev/null || echo "")
+
+            if [ -z "$DRIVER_URL" ]; then
+              # En son stable sürümü al
+              DRIVER_URL=$(curl -s \
+                "https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json" \
+                | python3 -c "
+          import sys, json
+          data = json.load(sys.stdin)
+          for dl in data['channels']['Stable']['downloads']['chromedriver']:
+              if dl['platform'] == 'linux64':
+                  print(dl['url'])
+                  break
+          ")
+            fi
+
+            echo "Driver URL: $DRIVER_URL"
+            wget -q "$DRIVER_URL" -O chromedriver.zip
+            unzip -q chromedriver.zip
+            find . -name "chromedriver" -type f | head -1 | xargs -I{} sudo mv {} /usr/local/bin/
+          else
+            # Eski Chrome için
+            DRIVER_VERSION=$(curl -s \
+              "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_MAJOR")
+            wget -q \
+              "https://chromedriver.storage.googleapis.com/$DRIVER_VERSION/chromedriver_linux64.zip" \
+              -O chromedriver.zip
+            unzip -q chromedriver.zip
+            sudo mv chromedriver /usr/local/bin/
+          fi
+
+          sudo chmod +x /usr/local/bin/chromedriver
+          chromedriver --version
+
+      # ── 6. Python Paketleri ──────────────────────────
+      - name: 📦 Python Paketleri Yükle
+        run: |
+          python -m pip install --upgrade pip
+          pip install \
+            selenium==4.16.0 \
+            selenium-wire==5.1.0 \
+            webdriver-manager==4.0.1 \
+            beautifulsoup4==4.12.2 \
+            requests==2.31.0 \
+            lxml==4.9.3 \
+            blinker==1.7.0 \
+            pyOpenSSL==23.3.0 \
+            urllib3==2.1.0
+
+      # ── 7. Virtual Display Başlat ────────────────────
+      - name: 🖥️ Virtual Display Başlat
+        run: |
+          export DISPLAY=:99
+          Xvfb :99 -screen 0 1920x1080x24 \
+            -ac +extension GLX +render -noreset &
+          echo "DISPLAY=:99" >> $GITHUB_ENV
+          sleep 3
+          echo "✅ Virtual display başlatıldı"
+
+      # ── 8. Scraper Çalıştır ──────────────────────────
       - name: 🔍 Scraper Çalıştır
         env:
           TARGET_URL: ${{ secrets.TARGET_URL }}
           DISPLAY: ':99'
+          PYTHONUNBUFFERED: '1'
         run: |
-          # Virtual display başlat
-          Xvfb :99 -screen 0 1920x1080x24 &
-          sleep 2
+          echo "🚀 Scraper başlatılıyor..."
+          echo "🌐 Hedef: $TARGET_URL"
           python scraper.py
+        timeout-minutes: 30
+        continue-on-error: false
 
-      - name: 📊 Sonuç Kontrol
+      # ── 9. Sonuçları Kontrol Et ──────────────────────
+      - name: 📊 Sonuçları Kontrol Et
+        id: check
         run: |
+          echo "📁 Dosya listesi:"
+          ls -la
+
           if [ -f "playlist.m3u" ]; then
-            COUNT=$(grep -c "#EXTINF" playlist.m3u || echo 0)
-            echo "✅ Kanal sayısı: $COUNT"
-            echo "CHANNEL_COUNT=$COUNT" >> $GITHUB_ENV
+            COUNT=$(grep -c "#EXTINF" playlist.m3u 2>/dev/null || echo "0")
+            SIZE=$(wc -c < playlist.m3u)
+
+            echo "✅ playlist.m3u bulundu"
+            echo "📺 Kanal sayısı: $COUNT"
+            echo "📦 Dosya boyutu: $SIZE byte"
+            echo ""
+            echo "--- playlist.m3u içeriği ---"
             cat playlist.m3u
+            echo "----------------------------"
+
+            echo "CHANNEL_COUNT=$COUNT" >> $GITHUB_ENV
+            echo "FILE_SIZE=$SIZE"      >> $GITHUB_ENV
+
+            if [ "$COUNT" -eq "0" ]; then
+              echo "⚠️ Uyarı: Kanal bulunamadı!"
+            fi
           else
-            echo "❌ Dosya bulunamadı!"
+            echo "❌ playlist.m3u bulunamadı!"
             exit 1
           fi
 
+          # Stats dosyası
+          if [ -f "stats.json" ]; then
+            echo ""
+            echo "--- stats.json ---"
+            cat stats.json
+          fi
+
+      # ── 10. Log Dosyalarını Yükle ────────────────────
+      - name: 📋 Log Dosyalarını Artifact'a Yükle
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: scraper-logs-${{ github.run_number }}
+          path: |
+            logs/
+            debug*.log
+            debug*.html
+            debug*.png
+            debug*.json
+          retention-days: 7
+
+      # ── 11. Git Ayarla ───────────────────────────────
       - name: ⚙️ Git Ayarla
         run: |
-          git config user.email "actions@github.com"
-          git config user.name "GitHub Actions"
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name  "github-actions[bot]"
 
+      # ── 12. Değişiklikleri Commit Et ─────────────────
       - name: 💾 Commit & Push
         run: |
-          git add playlist.m3u stats.json logs/ || true
-          git diff --staged --quiet || git commit -m \
-            "🔄 ${{ env.CHANNEL_COUNT }} kanal | $(date '+%Y-%m-%d %H:%M UTC')"
-          git push
+          git add playlist.m3u  || true
+          git add stats.json    || true
+          git add logs/         || true
 
-      - name: 📋 Özet
+          # Değişiklik var mı?
+          if git diff --staged --quiet; then
+            echo "ℹ️ Değişiklik yok"
+          else
+            TIMESTAMP=$(date '+%Y-%m-%d %H:%M UTC')
+            COUNT="${{ env.CHANNEL_COUNT }}"
+
+            git commit -m "🔄 Playlist güncellendi | ${COUNT} kanal | ${TIMESTAMP}"
+            git push
+
+            echo "✅ Push başarılı!"
+          fi
+
+      # ── 13. İş Özeti ─────────────────────────────────
+      - name: 📋 İş Özeti Oluştur
         if: always()
         run: |
-          echo "## 📺 Güncelleme Raporu" >> $GITHUB_STEP_SUMMARY
-          echo "| Alan | Değer |" >> $GITHUB_STEP_SUMMARY
-          echo "|------|-------|" >> $GITHUB_STEP_SUMMARY
-          echo "| Kanal | ${{ env.CHANNEL_COUNT }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| Tarih | $(date '+%Y-%m-%d %H:%M') |" >> $GITHUB_STEP_SUMMARY
-          echo "| URL | \`https://raw.githubusercontent.com/${{ github.repository }}/main/playlist.m3u\` |" >> $GITHUB_STEP_SUMMARY
+          STATUS="${{ job.status }}"
+          COUNT="${{ env.CHANNEL_COUNT }}"
+          TIME=$(date '+%Y-%m-%d %H:%M:%S UTC')
+          RAW_URL="https://raw.githubusercontent.com/${{ github.repository }}/main/playlist.m3u"
+
+          cat >> $GITHUB_STEP_SUMMARY << EOF
+          ## 📺 M3U8 Playlist Güncelleme Raporu
+
+          | Alan           | Değer          |
+          |----------------|----------------|
+          | 📅 Tarih       | ${TIME}        |
+          | 📺 Kanal       | ${COUNT}       |
+          | ✅ Durum       | ${STATUS}      |
+          | 🔢 Run No      | #${{ github.run_number }} |
+
+          ### 📥 Playlist URL
+          \`\`\`
+          ${RAW_URL}
+          \`\`\`
+
+          ### 📱 Nasıl Kullanılır?
+          VLC → Medya → Ağ Akışı Aç → URL yapıştır
+          EOF
+
+  # ════════════════════════════════════════════
+  #           BİLDİRİM JOB
+  # ════════════════════════════════════════════
+  notify:
+    name: 📨 Bildirim
+    runs-on: ubuntu-latest
+    needs: scrape
+    if: always()
+
+    steps:
+      - name: ✅ Başarı
+        if: needs.scrape.result == 'success'
+        run: |
+          echo "✅ Playlist başarıyla güncellendi!"
+          echo "📺 Kanal sayısı: ${{ env.CHANNEL_COUNT }}"
+
+          # Telegram bildirimi (opsiyonel)
+          # curl -s -X POST \
+          #   "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage" \
+          #   -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
+          #   -d "text=✅ Playlist güncellendi!"
+
+      - name: ❌ Hata
+        if: needs.scrape.result == 'failure'
+        run: |
+          echo "❌ Playlist güncellenemedi!"
+          echo "🔍 Logları kontrol et:"
+          echo "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
