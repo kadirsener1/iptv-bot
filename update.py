@@ -12,7 +12,7 @@ HEADERS = {
     "User-Agent": "Mozilla/5.0"
 }
 
-# 🔧 driver
+# 🔧 Selenium driver
 def create_driver():
     options = Options()
     options.add_argument("--headless=new")
@@ -21,17 +21,15 @@ def create_driver():
     options.set_capability("goog:loggingPrefs", {"performance": "ALL"})
     return webdriver.Chrome(options=options)
 
-# 📺 1. kanal listesini çek
+# 📺 Kanal listesini çek
 def get_channels():
     r = requests.get(DOMAIN, headers=HEADERS, timeout=10)
     ids = re.findall(r'matches\?id=([a-zA-Z0-9\-]+)', r.text)
-
     unique_ids = list(set(ids))
     print(f"📺 {len(unique_ids)} kanal bulundu")
-
     return unique_ids
 
-# 📡 2. m3u8 yakala (network)
+# 📡 m3u8 yakala (network log)
 def get_m3u8(driver, cid):
     try:
         url = urljoin(DOMAIN, f"matches?id={cid}")
@@ -48,7 +46,6 @@ def get_m3u8(driver, cid):
                 start = msg.find("http")
                 end = msg.find(".m3u8") + 5
                 link = msg[start:end]
-
                 print(f"✅ bulundu: {cid}")
                 return link
 
@@ -59,10 +56,10 @@ def get_m3u8(driver, cid):
 
     return None
 
-# ✍️ 3. M3U güncelle (sadece değişen)
+# ✍️ M3U güncelle (sadece değişen)
 def update_m3u(filename, new_links, referer):
     if not os.path.exists(filename):
-        print("⛔ M3U yok")
+        print("⛔ M3U dosyası yok")
         return
 
     with open(filename, "r", encoding="utf-8") as f:
@@ -126,4 +123,4 @@ driver.quit()
 if found:
     update_m3u("cafe.m3u", found, DOMAIN)
 else:
-    print("❌ hiç link yok")
+    print("❌ hiç link bulunamadı")
