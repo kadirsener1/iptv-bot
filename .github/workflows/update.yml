@@ -21,18 +21,23 @@ jobs:
         with:
           python-version: "3.10"
 
-      - name: Bağımlılıkları yükle
+      - name: Chrome kur
+        uses: browser-actions/setup-chrome@v1
+
+      - name: ChromeDriver kur
+        uses: nanasess/setup-chromedriver@v2
+
+      - name: Kütüphaneler
         run: |
-          python -m pip install --upgrade pip
-          pip install requests
+          pip install selenium
 
       - name: Script çalıştır
         run: python update.py
 
-      - name: Değişiklikleri kaydet
+      - name: Commit & Push
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
           git add .
-          git commit -m "Auto update M3U" || echo "No changes"
-          git push
+          git diff --cached --quiet || git commit -m "Auto update M3U"
+          git diff --cached --quiet || git push
