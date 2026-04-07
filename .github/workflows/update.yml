@@ -9,13 +9,12 @@ on:
   workflow_dispatch:
 
 jobs:
-  update:
-    runs-on: ubuntu-latest
+  
 
     steps:
     
       - name: Script çalıştır
-        run: python update.py
+        run: python scraper.py
 
       - name: Commit & Push
         run: |
