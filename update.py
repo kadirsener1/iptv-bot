@@ -1,123 +1,88 @@
 import requests
 import re
-import os
 from urllib.parse import urljoin
 
 HEADERS = {
     "User-Agent": "Mozilla/5.0"
 }
 
-# 1️⃣ Aktif domain bul
-def find_working_domain(start=494, end=520):
-    print("🧭 atomsport domain taranıyor...")
-    for i in range(start, end + 1):
-        url = f"https://atomsportv{i}.top/"
-        try:
-            r = requests.get(url, headers=HEADERS, timeout=5)
-            if r.status_code == 200:
-                print(f"✅ Aktif domain: {url}")
-                return url
-        except:
-            continue
-    print("❌ Domain bulunamadı.")
-    return None
+# m3u8 bul (her yerde ara)
+def find_m3u8(text):
+    matches = re.findall(r'https?://[^"\']+\.m3u8', text)
+    return matches[0] if matches else None
 
-# 2️⃣ iframe çek
-def extract_iframe(html):
-    match = re.search(r'<iframe[^>]+src="([^"]+)"', html)
-    return match.group(1) if match else None
+# iframe bul
+def find_iframes(html):
+    return re.findall(r'<iframe[^>]+src="([^"]+)"', html)
 
-# 3️⃣ m3u8 çek
-def extract_m3u8(html):
-    match = re.search(r'https?://[^"\']+\.m3u8', html)
-    return match.group(0) if match else None
-
-# 4️⃣ kanal linkini bul
-def get_channel_stream(domain, channel_id):
+# 🔥 ASIL FONKSİYON (çok güçlü)
+def get_stream(domain, cid):
     try:
-        url = urljoin(domain, f"matches?id={channel_id}")
-        res = requests.get(url, headers=HEADERS, timeout=10)
+        url = urljoin(domain, f"matches?id={cid}")
+        print(f"\n🔍 {cid} kontrol ediliyor...")
 
-        iframe = extract_iframe(res.text)
-        if iframe:
-            iframe_res = requests.get(iframe, headers=HEADERS, timeout=10)
-            m3u8 = extract_m3u8(iframe_res.text)
+        r1 = requests.get(url, headers=HEADERS, timeout=10)
+
+        # 1️⃣ direkt m3u8 var mı?
+        m3u8 = find_m3u8(r1.text)
+        if m3u8:
+            print("✅ Direkt bulundu")
+            return m3u8
+
+        # 2️⃣ iframe'leri tara
+        iframes = find_iframes(r1.text)
+
+        for iframe in iframes:
+            iframe_url = urljoin(domain, iframe)
+            r2 = requests.get(iframe_url, headers=HEADERS, timeout=10)
+
+            m3u8 = find_m3u8(r2.text)
             if m3u8:
-                print(f"✅ {channel_id}: bulundu")
+                print("✅ iframe içinde bulundu")
                 return m3u8
 
-        print(f"❌ {channel_id}: bulunamadı")
+            # 3️⃣ iç iframe varsa tekrar tara
+            inner_iframes = find_iframes(r2.text)
+            for inner in inner_iframes:
+                inner_url = urljoin(domain, inner)
+                r3 = requests.get(inner_url, headers=HEADERS, timeout=10)
+
+                m3u8 = find_m3u8(r3.text)
+                if m3u8:
+                    print("✅ iç iframe içinde bulundu")
+                    return m3u8
+
+        print("❌ bulunamadı")
+
     except Exception as e:
-        print(f"⚠️ {channel_id}: hata - {e}")
+        print(f"⚠️ hata: {e}")
+
     return None
 
-# 5️⃣ Sadece değişenleri güncelle
-def update_m3u(filename, new_links, referer):
-    if not os.path.exists(filename):
-        print("⛔ M3U dosyası yok!")
-        return
 
-    with open(filename, "r", encoding="utf-8") as f:
-        lines = f.read().splitlines()
+# 🔎 test
+domain = "https://atomsportv494.top/"
 
-    updated = []
-    i = 0
-
-    while i < len(lines):
-        line = lines[i]
-        updated.append(line)
-
-        if line.startswith("#EXTINF") and 'tvg-id="' in line:
-            match = re.search(r'tvg-id="([^"]+)"', line)
-            if match:
-                cid = match.group(1)
-
-                if cid in new_links:
-                    new_url = new_links[cid]
-
-                    j = i + 1
-                    if j < len(lines) and lines[j].startswith("#EXTVLCOPT"):
-                        j += 1
-                    if j < len(lines):
-                        old_url = lines[j]
-
-                    if new_url != old_url:
-                        print(f"🔄 Güncellendi: {cid}")
-                        i += 1
-                        if i < len(lines) and lines[i].startswith("#EXTVLCOPT"):
-                            i += 1
-                        if i < len(lines) and lines[i].startswith("http"):
-                            i += 1
-                        updated.append(f"#EXTVLCOPT:http-referrer={referer}")
-                        updated.append(new_url)
-                        continue
-        i += 1
-
-    with open(filename, "w", encoding="utf-8") as f:
-        f.write("\n".join(updated))
-    print("✅ M3U güncelleme tamamlandı")
-
-# Kanal listesi (tvg-id ile aynı olmalı)
 channels = [
     "bein-sports-1",
     "bein-sports-2",
-    "ssport",
+    "bein-sports-3",
+    "bein-sports-4",
+    "bein-sports-5",
+    "bein-sports-max-1",
+    "bein-sports-max-2",
+    "s-sport",
+    "s-sport-2",
     "tivibu-spor-1"
 ]
 
-# Ana akış
-domain = find_working_domain()
+results = {}
 
-if domain:
-    found_links = {}
-    for ch in channels:
-        link = get_channel_stream(domain, ch)
-        if link:
-            found_links[ch] = link
+for ch in channels:
+    link = get_stream(domain, ch)
+    if link:
+        results[ch] = link
 
-    if found_links:
-        update_m3u("cafe.m3u", found_links, domain)
-    else:
-        print("❌ Hiç link bulunamadı")
-else:
-    print("❌ Domain bulunamadı")
+print("\n📡 SONUÇ:")
+for k, v in results.items():
+    print(k, "=>", v)
