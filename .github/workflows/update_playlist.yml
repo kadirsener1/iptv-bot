@@ -85,7 +85,6 @@ jobs:
                   break
           ")
 
-          echo "📥 Chrome indiriliyor..."
           wget -q "$CHROME_URL" -O chrome-linux64.zip
           unzip -q chrome-linux64.zip -d chrome_tmp
           sudo mv chrome_tmp/chrome-linux64 /opt/chrome
@@ -93,7 +92,6 @@ jobs:
           sudo chmod +x /opt/chrome/chrome
           rm -rf chrome_tmp chrome-linux64.zip
 
-          echo "📥 ChromeDriver indiriliyor..."
           wget -q "$DRIVER_URL" -O chromedriver-linux64.zip
           unzip -q chromedriver-linux64.zip -d driver_tmp
           DRIVER_BIN=$(find driver_tmp -name "chromedriver" -type f | head -1)
@@ -148,53 +146,64 @@ jobs:
           driver.quit()
           EOF
 
+      # ── URL Kontrol ──────────────────────────────────
+      - name: 🔎 URL Kontrol
+        run: |
+          # Secret geldi mi?
+          if [ -z "${{ secrets.TARGET_URL }}" ]; then
+            echo "⚠️ TARGET_URL Secret boş!"
+            echo "✅ Varsayılan URL kullanılacak"
+            echo "FINAL_URL=https://atomsportv494.top" >> $GITHUB_ENV
+          else
+            echo "✅ TARGET_URL Secret mevcut"
+            echo "FINAL_URL=${{ secrets.TARGET_URL }}" >> $GITHUB_ENV
+          fi
+
       - name: 🔍 Scraper Çalıştır
         env:
-          TARGET_URL: ${{ secrets.TARGET_URL }}
+          TARGET_URL: ${{ env.FINAL_URL }}
           DISPLAY: ':99'
           CHROMEDRIVER_PATH: '/usr/local/bin/chromedriver'
           CHROME_BIN: '/usr/local/bin/google-chrome'
           PYTHONUNBUFFERED: '1'
         run: |
+          echo "🎯 Hedef URL: $TARGET_URL"
+          
+          # Son güvenlik kontrolü
+          if [ -z "$TARGET_URL" ]; then
+            export TARGET_URL="https://atomsportv494.top"
+            echo "⚠️ URL boş geldi, varsayılan kullanılıyor: $TARGET_URL"
+          fi
+          
           python scraper.py
+        timeout-minutes: 30
 
-      # ── DÜZELTME: GITHUB_ENV formatı ────────────────
       - name: 📊 Sonuç Kontrol
         run: |
           if [ -f "playlist.m3u" ]; then
-            # grep çıktısını güvenli al
             COUNT=$(grep -c "#EXTINF" playlist.m3u || true)
-            
-            # Boş veya sayı değilse 0 yap
             if ! [[ "$COUNT" =~ ^[0-9]+$ ]]; then
               COUNT=0
             fi
-
-            echo "📺 Kanal sayısı: $COUNT"
-            
-            # GITHUB_ENV'e doğru format ile yaz
+            echo "📺 Kanal: $COUNT"
             echo "CHANNEL_COUNT=${COUNT}" >> $GITHUB_ENV
-
-            echo "--- playlist.m3u ---"
             cat playlist.m3u
-            echo "--------------------"
           else
-            echo "❌ playlist.m3u bulunamadı!"
+            echo "❌ playlist.m3u yok!"
             echo "CHANNEL_COUNT=0" >> $GITHUB_ENV
-            exit 1
           fi
 
-      - name: 📦 Artifact Yükle
+      - name: 📦 Artifact
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: logs-${{ github.run_number }}
+          name: debug-${{ github.run_number }}
           path: |
             logs/
             *.log
             *.png
             *.html
-          retention-days: 5
+          retention-days: 7
 
       - name: ⚙️ Git Ayarla
         run: |
@@ -203,16 +212,12 @@ jobs:
 
       - name: 💾 Commit & Push
         run: |
-          git add playlist.m3u  2>/dev/null || true
-          git add stats.json    2>/dev/null || true
-          git add logs/         2>/dev/null || true
-
+          git add playlist.m3u stats.json logs/ 2>/dev/null || true
           if git diff --staged --quiet; then
             echo "ℹ️ Değişiklik yok"
           else
             COUNT="${{ env.CHANNEL_COUNT }}"
-            DATE="$(date '+%Y-%m-%d %H:%M UTC')"
-            git commit -m "🔄 ${COUNT} kanal | ${DATE}"
+            git commit -m "🔄 ${COUNT} kanal | $(date '+%Y-%m-%d %H:%M UTC')"
             git push
             echo "✅ Push tamam"
           fi
@@ -222,16 +227,16 @@ jobs:
         run: |
           COUNT="${{ env.CHANNEL_COUNT }}"
           RAW="https://raw.githubusercontent.com/${{ github.repository }}/main/playlist.m3u"
-          
           {
             echo "## 📺 Playlist Raporu"
             echo "| Alan | Değer |"
             echo "|------|-------|"
             echo "| 📅 Tarih | $(date '+%Y-%m-%d %H:%M UTC') |"
+            echo "| 🎯 URL | ${{ env.FINAL_URL }} |"
             echo "| 📺 Kanal | ${COUNT} |"
             echo "| ✅ Durum | ${{ job.status }} |"
             echo ""
-            echo "### 📥 URL"
+            echo "### 📥 Playlist URL"
             echo '```'
             echo "${RAW}"
             echo '```'
