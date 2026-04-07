@@ -8,7 +8,7 @@ HEADERS = {
 }
 
 # 1️⃣ Aktif domain bul
-def find_working_domain(start=480, end=520):
+def find_working_domain(start=494, end=520):
     print("🧭 atomsport domain taranıyor...")
     for i in range(start, end + 1):
         url = f"https://atomsportv{i}.top/"
