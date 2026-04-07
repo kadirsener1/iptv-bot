@@ -3,5 +3,8 @@
 #EXTINF:-1 tvg-id="bein-sports-1", Bein Sports 1
 http://test.m3u8
 
+#EXTINF:-1 tvg-id="bein-sports-2", Bein Sports 2
+http://test.m3u8
+
 #EXTINF:-1 tvg-id="s-sport", S Sport
 http://test.m3u8
