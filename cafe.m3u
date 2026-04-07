@@ -1,6 +1,7 @@
 #EXTM3U
 
-#EXTINF:-1 tvg-id="bein-sports-1", Bein Sports 1
+#EXTINF:-1 tvg-id="bein-sports-1", bein-sports-1
+#EXTVLCOPT:http-referrer=https://atomsportv494.top
 http://test.m3u8
 
 #EXTINF:-1 tvg-id="bein-sports-2", Bein Sports 2
