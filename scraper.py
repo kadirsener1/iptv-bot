@@ -31,7 +31,7 @@ OUTPUT_FILE  = "playlist.m3u"
 STATS_FILE   = "stats.json"
 CHROMEDRIVER = os.environ.get("CHROMEDRIVER_PATH", "/usr/local/bin/chromedriver")
 CHROME_BIN   = os.environ.get("CHROME_BIN", "/usr/local/bin/google-chrome")
-STREAM_WAIT  = 8   # ← 15'ten 8'e düşürüldü
+STREAM_WAIT  = 8
 
 # ── Taranacak Sayfalar ────────────────────────────────
 PAGES = [
@@ -40,6 +40,7 @@ PAGES = [
     {"slug": "matches?id=bein-sports-3",  "name": "beIN Sports 3",  "group": "Spor"},
     {"slug": "matches?id=bein-sports-4",  "name": "beIN Sports 4",  "group": "Spor"},
     {"slug": "matches?id=bein-sports-5",  "name": "beIN Sports 5",  "group": "Spor"},
+
 ]
 
 # ── Selenium ──────────────────────────────────────────
@@ -125,9 +126,9 @@ def get_driver():
 #  TEK SAYFA TARA
 # ═══════════════════════════════════════════════════════
 def scrape_page(driver, page):
-    slug = page["slug"]
-    name = page["name"]
-    url  = f"{BASE_URL}/{slug}"
+    slug  = page["slug"]
+    name  = page["name"]
+    url   = f"{BASE_URL}/{slug}"
 
     log.info(f"\n{'─'*50}")
     log.info(f"🔍 {name} → {url}")
@@ -149,30 +150,24 @@ def scrape_page(driver, page):
     except Exception as e:
         log.warning(f"  ⚠️ Sayfa yükleme: {e}")
 
-    time.sleep(2)  # ← 3'ten 2'ye düşürüldü
+    time.sleep(3)
 
     # Play butonuna tıkla
     click_play(driver)
 
-    # ── M3U8 bulunana kadar bekle (max STREAM_WAIT) ───
-    log.info(f"  📡 M3U8 bekleniyor (max {STREAM_WAIT}s)...")
+    # Network bekle
+    log.info(f"  📡 {STREAM_WAIT}s bekleniyor...")
+    time.sleep(STREAM_WAIT)
+
+    # Sadece m3u8 linklerini topla
     m3u8_url = None
 
     if WIRE:
-        for elapsed in range(STREAM_WAIT):
-            # Her saniye kontrol et
-            for req in driver.requests:
-                if is_m3u8(req.url):
-                    m3u8_url = req.url
-                    log.info(f"  🎯 {elapsed+1}s'de bulundu: {m3u8_url}")
-                    break
-
-            if m3u8_url:
-                break  # Bulununca hemen dur
-
-            time.sleep(1)
-    else:
-        time.sleep(STREAM_WAIT)
+        for req in driver.requests:
+            if is_m3u8(req.url):
+                m3u8_url = req.url
+                log.info(f"  🎯 Bulundu: {m3u8_url}")
+                break  # İlk m3u8'i al, dur
 
     # Network'te bulunamadıysa JS'den dene
     if not m3u8_url:
@@ -209,7 +204,7 @@ def click_play(driver):
             )
             el.click()
             log.info(f"  ▶️ {sel}")
-            time.sleep(1)  # ← 2'den 1'e düşürüldü
+            time.sleep(2)
             return
         except Exception:
             pass
@@ -221,7 +216,7 @@ def click_play(driver):
                 v.play().catch(function(e) {});
             });
         """)
-        time.sleep(1)  # ← 2'den 1'e düşürüldü
+        time.sleep(2)
     except Exception:
         pass
 
@@ -330,7 +325,7 @@ def main():
                     "group": page["group"],
                 })
 
-            time.sleep(1)  # ← 2'den 1'e düşürüldü
+            time.sleep(2)
 
     except Exception as e:
         log.error(f"❌ Hata: {e}", exc_info=True)
