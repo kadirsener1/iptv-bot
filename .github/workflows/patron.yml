@@ -11,7 +11,7 @@ on:
       - 'patron.py'
 
 jobs:
-  scrape:
+  patron:
     name: 📺 M3U8 Tara
     runs-on: ubuntu-22.04
 
@@ -159,7 +159,7 @@ jobs:
             echo "FINAL_URL=${{ secrets.TARGET_URL }}" >> $GITHUB_ENV
           fi
 
-      - name: 🔍 Scraper Çalıştır
+      - name: 🔍 patron Çalıştır
         env:
           TARGET_URL: ${{ env.FINAL_URL }}
           DISPLAY: ':99'
@@ -175,7 +175,7 @@ jobs:
             echo "⚠️ URL boş geldi, varsayılan kullanılıyor: $TARGET_URL"
           fi
           
-          python scraper.py
+          python patron.py
         timeout-minutes: 30
 
       - name: 📊 Sonuç Kontrol
