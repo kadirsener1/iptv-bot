@@ -1,9 +1,15 @@
+## `scraper.py` - Domain Aralığı Versiyonu
+
+Sadece en üstteki `find_base_url` kısmını değiştir:
+
+```python
 import os
 import re
 import json
 import time
 import logging
 from datetime import datetime
+import requests as req_lib
 
 # ── Logging ───────────────────────────────────────────
 os.makedirs("logs", exist_ok=True)
@@ -25,13 +31,82 @@ logging.getLogger("hpack").setLevel(logging.ERROR)
 logging.getLogger("urllib3").setLevel(logging.ERROR)
 logging.getLogger("selenium").setLevel(logging.ERROR)
 
+
+# ═══════════════════════════════════════════════════════
+#  BASE URL OTOMATİK BUL - SAYI ARALIĞI
+# ═══════════════════════════════════════════════════════
+
+# ── Domain Ayarları ──────────────────────────────────
+DOMAIN_PREFIX   = "https://atomsportv"  # Sabit kısım
+DOMAIN_SUFFIX   = ".top"               # Son ek
+START_NUM       = 494                  # Başlangıç sayısı
+END_NUM         = 500                  # Bitiş sayısı
+EXTRA_DOMAINS = [
+    # Sabit domainler (aralık dışı olanlar buraya)
+    "https://atomsport.top",
+    "https://atomsportv1.top",
+    "https://atomsportv2.top",
+    "https://atomsportv3.top",
+]
+
+# Veya tek satır olarak da ayarlayabilirsin:
+# DOMAIN_ARALIK = (494, 500)  → bu da olur
+
+def find_base_url():
+    """Çalışan BASE_URL'i otomatik bul"""
+    headers = {
+        "User-Agent": (
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+            "AppleWebKit/537.36 (KHTML, like Gecko) "
+            "Chrome/120.0.0.0 Safari/537.36"
+        )
+    }
+
+    log.info("🔎 Aktif domain aranıyor...")
+    log.info(f"   Aralık: {DOMAIN_PREFIX}[{START_NUM}-{END_NUM}]{DOMAIN_SUFFIX}")
+
+    all_domains = []
+
+    # 1. Sayı aralığından üret
+    for num in range(START_NUM, END_NUM + 1):
+        all_domains.append(f"{DOMAIN_PREFIX}{num}{DOMAIN_SUFFIX}")
+
+    # 2. Sabit domainleri ekle
+    all_domains.extend(EXTRA_DOMAINS)
+
+    log.info(f"   Toplam {len(all_domains)} domain denenyecek")
+
+    for domain in all_domains:
+        try:
+            resp = req_lib.get(
+                domain,
+                headers=headers,
+                timeout=8,
+                allow_redirects=True
+            )
+            if resp.status_code == 200:
+                final_url = resp.url.rstrip("/")
+                log.info(f"  ✅ Aktif: {final_url}")
+                return final_url
+            else:
+                log.info(f"  ❌ {domain} → {resp.status_code}")
+        except Exception as e:
+            log.info(f"  ❌ {domain} → Bağlantı hatası")
+
+    # Son çare: listedeki ilk domaini döndür
+    log.warning("⚠️ Hiçbiri çalışmadı, ilk kullanılacak")
+    return all_domains[0]
+
+
 # ── Ayarlar ───────────────────────────────────────────
-BASE_URL     = "https://atomsportv494.top"
+BASE_URL     = find_base_url()
 OUTPUT_FILE  = "playlist.m3u"
 STATS_FILE   = "stats.json"
 CHROMEDRIVER = os.environ.get("CHROMEDRIVER_PATH", "/usr/local/bin/chromedriver")
 CHROME_BIN   = os.environ.get("CHROME_BIN", "/usr/local/bin/google-chrome")
-STREAM_WAIT  = 2
+STREAM_WAIT  = 8
+
+log.info(f"🌐 BASE_URL: {BASE_URL}")
 
 # ── Taranacak Sayfalar ────────────────────────────────
 PAGES = [
@@ -40,7 +115,6 @@ PAGES = [
     {"slug": "matches?id=bein-sports-3",  "name": "beIN Sports 3",  "group": "Spor"},
     {"slug": "matches?id=bein-sports-4",  "name": "beIN Sports 4",  "group": "Spor"},
     {"slug": "matches?id=bein-sports-5",  "name": "beIN Sports 5",  "group": "Spor"},
-
 ]
 
 # ── Selenium ──────────────────────────────────────────
@@ -59,9 +133,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 
-# ═══════════════════════════════════════════════════════
-#  YARDIMCI
-# ═══════════════════════════════════════════════════════
 def is_m3u8(url):
     if not url or not isinstance(url, str):
         return False
@@ -69,9 +140,6 @@ def is_m3u8(url):
     return lower.endswith(".m3u8") or ".m3u8?" in lower
 
 
-# ═══════════════════════════════════════════════════════
-#  DRIVER
-# ═══════════════════════════════════════════════════════
 def get_driver():
     log.info("🔧 Driver başlatılıyor...")
 
@@ -122,26 +190,21 @@ def get_driver():
     return driver
 
 
-# ═══════════════════════════════════════════════════════
-#  TEK SAYFA TARA
-# ═══════════════════════════════════════════════════════
 def scrape_page(driver, page):
-    slug  = page["slug"]
-    name  = page["name"]
-    url   = f"{BASE_URL}/{slug}"
+    slug = page["slug"]
+    name = page["name"]
+    url  = f"{BASE_URL}/{slug}"
 
     log.info(f"\n{'─'*50}")
     log.info(f"🔍 {name} → {url}")
     log.info(f"{'─'*50}")
 
-    # Önceki istekleri temizle
     if WIRE:
         try:
             del driver.requests
         except Exception:
             pass
 
-    # Sayfayı aç
     try:
         driver.get(url)
         WebDriverWait(driver, 15).until(
@@ -150,30 +213,29 @@ def scrape_page(driver, page):
     except Exception as e:
         log.warning(f"  ⚠️ Sayfa yükleme: {e}")
 
-    time.sleep(3)
+    time.sleep(2)
 
-    # Play butonuna tıkla
     click_play(driver)
 
-    # Network bekle
-    log.info(f"  📡 {STREAM_WAIT}s bekleniyor...")
-    time.sleep(STREAM_WAIT)
-
-    # Sadece m3u8 linklerini topla
+    log.info(f"  📡 M3U8 bekleniyor (max {STREAM_WAIT}s)...")
     m3u8_url = None
 
     if WIRE:
-        for req in driver.requests:
-            if is_m3u8(req.url):
-                m3u8_url = req.url
-                log.info(f"  🎯 Bulundu: {m3u8_url}")
-                break  # İlk m3u8'i al, dur
+        for elapsed in range(STREAM_WAIT):
+            for req in driver.requests:
+                if is_m3u8(req.url):
+                    m3u8_url = req.url
+                    log.info(f"  🎯 {elapsed+1}s'de bulundu: {m3u8_url}")
+                    break
+            if m3u8_url:
+                break
+            time.sleep(1)
+    else:
+        time.sleep(STREAM_WAIT)
 
-    # Network'te bulunamadıysa JS'den dene
     if not m3u8_url:
         m3u8_url = find_in_js(driver)
 
-    # JS'de de bulunamadıysa sayfa kaynağından dene
     if not m3u8_url:
         m3u8_url = find_in_source(driver.page_source)
 
@@ -185,9 +247,6 @@ def scrape_page(driver, page):
     return m3u8_url
 
 
-# ═══════════════════════════════════════════════════════
-#  PLAY BUTONU
-# ═══════════════════════════════════════════════════════
 def click_play(driver):
     selectors = [
         ".play-button", ".btn-play", "#play-button",
@@ -204,7 +263,7 @@ def click_play(driver):
             )
             el.click()
             log.info(f"  ▶️ {sel}")
-            time.sleep(2)
+            time.sleep(1)
             return
         except Exception:
             pass
@@ -216,20 +275,16 @@ def click_play(driver):
                 v.play().catch(function(e) {});
             });
         """)
-        time.sleep(2)
+        time.sleep(1)
     except Exception:
         pass
 
 
-# ═══════════════════════════════════════════════════════
-#  JS'DEN M3U8 BUL
-# ═══════════════════════════════════════════════════════
 def find_in_js(driver):
     try:
         result = driver.execute_script("""
             var found = null;
 
-            // Video src
             document.querySelectorAll('video,source').forEach(function(el) {
                 if (!found && el.src && el.src.toLowerCase().indexOf('.m3u8') !== -1)
                     found = el.src;
@@ -238,7 +293,6 @@ def find_in_js(driver):
             });
             if (found) return found;
 
-            // JWPlayer
             try {
                 var jw = jwplayer();
                 var item = jw.getPlaylistItem();
@@ -246,7 +300,6 @@ def find_in_js(driver):
                     return item.file;
             } catch(e) {}
 
-            // HTML içinde ara
             var m = document.documentElement.innerHTML.match(
                 /https?:\\/\\/[^\\s'"<>]+\\.m3u8(?:\\?[^\\s'"<>]*)?/i
             );
@@ -260,9 +313,6 @@ def find_in_js(driver):
     return None
 
 
-# ═══════════════════════════════════════════════════════
-#  KAYNAK'TAN M3U8 BUL
-# ═══════════════════════════════════════════════════════
 def find_in_source(html):
     match = re.search(
         r'https?://[^\s\'"<>]+\.m3u8(?:\?[^\s\'"<>]*)?',
@@ -277,9 +327,6 @@ def find_in_source(html):
     return None
 
 
-# ═══════════════════════════════════════════════════════
-#  M3U OLUŞTUR
-# ═══════════════════════════════════════════════════════
 def create_m3u(channels):
     now   = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     lines = [
@@ -297,13 +344,11 @@ def create_m3u(channels):
     return "".join(lines)
 
 
-# ═══════════════════════════════════════════════════════
-#  MAIN
-# ═══════════════════════════════════════════════════════
 def main():
     log.info("=" * 55)
     log.info("   M3U8 Scraper")
-    log.info(f"   Toplam sayfa: {len(PAGES)}")
+    log.info(f"   Base URL : {BASE_URL}")
+    log.info(f"   Toplam   : {len(PAGES)} sayfa")
     log.info("=" * 55)
 
     start    = time.time()
@@ -325,7 +370,7 @@ def main():
                     "group": page["group"],
                 })
 
-            time.sleep(2)
+            time.sleep(1)
 
     except Exception as e:
         log.error(f"❌ Hata: {e}", exc_info=True)
@@ -338,7 +383,6 @@ def main():
             except Exception:
                 pass
 
-    # Sonuç
     elapsed = round(time.time() - start, 1)
     log.info(f"\n{'='*55}")
     log.info(f"🏁 Tamamlandı!")
@@ -346,18 +390,17 @@ def main():
     log.info(f"⏱️  Süre  : {elapsed}s")
     log.info(f"{'='*55}")
 
-    # M3U kaydet
     content = create_m3u(channels)
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         f.write(content)
     log.info(f"✅ {OUTPUT_FILE} kaydedildi")
 
-    # Stats kaydet
     with open(STATS_FILE, "w", encoding="utf-8") as f:
         json.dump({
             "last_update"    : datetime.now().isoformat(),
             "total_channels" : len(channels),
             "duration_sec"   : elapsed,
+            "base_url"       : BASE_URL,
             "channels"       : channels
         }, f, ensure_ascii=False, indent=2)
     log.info(f"✅ {STATS_FILE} kaydedildi")
@@ -368,3 +411,31 @@ def main():
 
 if __name__ == "__main__":
     main()
+```
+
+---
+
+## Kullanımı
+
+En üstteki ayarları değiştir:
+
+```python
+DOMAIN_PREFIX = "https://atomsportv"  # Sabit kısım
+DOMAIN_SUFFIX = ".top"               # Son ek
+START_NUM     = 494                  # Başlangıç
+END_NUM       = 550                  # Bitiş
+```
+
+**Sonuç:**
+```
+https://atomsportv494.top
+https://atomsportv495.top
+https://atomsportv496.top
+https://atomsportv497.top
+https://atomsportv498.top
+https://atomsportv499.top
+https://atomsportv500.top
++ EXTRA_DOMAINS'dekiler
+```
+
+Aktif olana kadar sırayla dener, ilk 200 dönen domain'i seçer ✅
