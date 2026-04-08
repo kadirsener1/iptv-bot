@@ -1,7 +1,7 @@
 {
-  "last_update": "2026-04-08T00:52:30.543836",
+  "last_update": "2026-04-08T01:13:38.239702",
   "total_channels": 5,
-  "duration_sec": 167.2,
+  "duration_sec": 193.0,
   "channels": [
     {
       "name": "beIN Sports 1",
@@ -10,7 +10,7 @@
     },
     {
       "name": "beIN Sports 2",
-      "url": "https://hlsssssss.yemerke.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-11.m3u8",
+      "url": "https://hlsssssss.yemerke.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-2.m3u8",
       "group": "Spor"
     },
     {

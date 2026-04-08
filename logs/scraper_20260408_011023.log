@@ -1,0 +1,61 @@
+2026-04-08 01:10:25,260 [INFO] ✅ SeleniumWire aktif
+2026-04-08 01:10:25,261 [INFO] =======================================================
+2026-04-08 01:10:25,261 [INFO]    M3U8 Scraper
+2026-04-08 01:10:25,262 [INFO]    Toplam sayfa: 5
+2026-04-08 01:10:25,262 [INFO] =======================================================
+2026-04-08 01:10:25,262 [INFO] 🔧 Driver başlatılıyor...
+2026-04-08 01:10:25,996 [INFO] ✅ Driver başlatıldı
+2026-04-08 01:10:25,997 [INFO] 
+[1/5]
+2026-04-08 01:10:25,997 [INFO] 
+──────────────────────────────────────────────────
+2026-04-08 01:10:25,997 [INFO] 🔍 beIN Sports 1 → https://atomsportv494.top/matches?id=bein-sports-1
+2026-04-08 01:10:25,997 [INFO] ──────────────────────────────────────────────────
+2026-04-08 01:11:01,223 [INFO]   📡 2s bekleniyor...
+2026-04-08 01:11:03,230 [INFO]   🎯 Bulundu: https://hlsssssss.yemerke.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-11.m3u8
+2026-04-08 01:11:03,231 [INFO]   ✅ beIN Sports 1: https://hlsssssss.yemerke.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-11.m3u8
+2026-04-08 01:11:05,232 [INFO] 
+[2/5]
+2026-04-08 01:11:05,232 [INFO] 
+──────────────────────────────────────────────────
+2026-04-08 01:11:05,232 [INFO] 🔍 beIN Sports 2 → https://atomsportv494.top/matches?id=bein-sports-2
+2026-04-08 01:11:05,232 [INFO] ──────────────────────────────────────────────────
+2026-04-08 01:11:39,544 [INFO]   📡 2s bekleniyor...
+2026-04-08 01:11:41,559 [INFO]   🎯 Bulundu: https://hlsssssss.yemerke.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-2.m3u8
+2026-04-08 01:11:41,561 [INFO]   ✅ beIN Sports 2: https://hlsssssss.yemerke.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-2.m3u8
+2026-04-08 01:11:43,561 [INFO] 
+[3/5]
+2026-04-08 01:11:43,561 [INFO] 
+──────────────────────────────────────────────────
+2026-04-08 01:11:43,561 [INFO] 🔍 beIN Sports 3 → https://atomsportv494.top/matches?id=bein-sports-3
+2026-04-08 01:11:43,561 [INFO] ──────────────────────────────────────────────────
+2026-04-08 01:12:18,068 [INFO]   📡 2s bekleniyor...
+2026-04-08 01:12:20,074 [INFO]   🎯 Bulundu: https://hlsssssss.yemerke.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-3.m3u8
+2026-04-08 01:12:20,074 [INFO]   ✅ beIN Sports 3: https://hlsssssss.yemerke.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-3.m3u8
+2026-04-08 01:12:22,075 [INFO] 
+[4/5]
+2026-04-08 01:12:22,075 [INFO] 
+──────────────────────────────────────────────────
+2026-04-08 01:12:22,075 [INFO] 🔍 beIN Sports 4 → https://atomsportv494.top/matches?id=bein-sports-4
+2026-04-08 01:12:22,075 [INFO] ──────────────────────────────────────────────────
+2026-04-08 01:12:56,064 [INFO]   📡 2s bekleniyor...
+2026-04-08 01:12:58,076 [INFO]   🎯 Bulundu: https://hlsssssss.yemerke.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-4.m3u8
+2026-04-08 01:12:58,077 [INFO]   ✅ beIN Sports 4: https://hlsssssss.yemerke.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-4.m3u8
+2026-04-08 01:13:00,077 [INFO] 
+[5/5]
+2026-04-08 01:13:00,077 [INFO] 
+──────────────────────────────────────────────────
+2026-04-08 01:13:00,077 [INFO] 🔍 beIN Sports 5 → https://atomsportv494.top/matches?id=bein-sports-5
+2026-04-08 01:13:00,077 [INFO] ──────────────────────────────────────────────────
+2026-04-08 01:13:34,172 [INFO]   📡 2s bekleniyor...
+2026-04-08 01:13:36,173 [INFO]   🎯 Bulundu: https://hlsssssss.yemerke.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-5.m3u8
+2026-04-08 01:13:36,173 [INFO]   ✅ beIN Sports 5: https://hlsssssss.yemerke.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-5.m3u8
+2026-04-08 01:13:38,239 [INFO] 🔒 Driver kapatıldı
+2026-04-08 01:13:38,239 [INFO] 
+=======================================================
+2026-04-08 01:13:38,239 [INFO] 🏁 Tamamlandı!
+2026-04-08 01:13:38,239 [INFO] 📺 Kanal : 5/5
+2026-04-08 01:13:38,239 [INFO] ⏱️  Süre  : 193.0s
+2026-04-08 01:13:38,239 [INFO] =======================================================
+2026-04-08 01:13:38,239 [INFO] ✅ playlist.m3u kaydedildi
+2026-04-08 01:13:38,239 [INFO] ✅ stats.json kaydedildi
