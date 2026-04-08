@@ -1,6 +1,6 @@
 ## `scraper.py` - Domain Aralığı Versiyonu
 
-Sadece en üstteki `find_base_url` kısmını değiştir:
+
 
 ```python
 import os
