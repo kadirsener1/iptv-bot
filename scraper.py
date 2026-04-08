@@ -35,11 +35,11 @@ STREAM_WAIT  = 15
 
 # ── Taranacak Sayfalar ────────────────────────────────
 PAGES = [
-    {"slug": "bein-sports-1",  "name": "beIN Sports 1",  "group": "Spor"},
-    {"slug": "bein-sports-2",  "name": "beIN Sports 2",  "group": "Spor"},
-    {"slug": "bein-sports-3",  "name": "beIN Sports 3",  "group": "Spor"},
-    {"slug": "bein-sports-4",  "name": "beIN Sports 4",  "group": "Spor"},
-    {"slug": "bein-sports-5",  "name": "beIN Sports 5",  "group": "Spor"},
+    {"slug": "matches?id=bein-sports-1",  "name": "beIN Sports 1",  "group": "Spor"},
+    {"slug": "matches?id=bein-sports-2",  "name": "beIN Sports 2",  "group": "Spor"},
+    {"slug": "matches?id=bein-sports-3",  "name": "beIN Sports 3",  "group": "Spor"},
+    {"slug": "matches?id=bein-sports-4",  "name": "beIN Sports 4",  "group": "Spor"},
+    {"slug": "matches?id=bein-sports-5",  "name": "beIN Sports 5",  "group": "Spor"},
     
 ]
 
