@@ -20,3 +20,5 @@ https://hlsssssss.yemerke.workers.dev/https://corestream.ronaldovurdu.help//hls/
 #EXTINF:-1 tvg-name="beIN Sports Max 1" group-title="Spor",beIN Sports Max 1
 https://hlsssssss.yemerke.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-max-1.m3u8
 
+#EXTINF:0 CUID="1658" tvg-chno="null" tvg-name="24" tvg-logo="https://logo.iptveditor.com/24.png" group-title="HABER KANALLARI",24
+https://tv.ensonhaber.com/tv24/tv24.m3u8
