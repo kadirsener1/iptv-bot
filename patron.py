@@ -30,23 +30,16 @@ logging.getLogger("selenium").setLevel(logging.ERROR)
 # ═══════════════════════════════════════════════════════
 #  BASE URL OTOMATİK BUL
 # ═══════════════════════════════════════════════════════
-MIN_NUMBER  = 25
+MIN_NUMBER  = 1
 MAX_NUMBER  = 60
 DOMAIN_BASE = "patronizle"
 DOMAIN_TLD  = "cfd"
-
-EXTRA_DOMAINS = [
-    "https://patronizle29.cfd",
-    "https://patronizle.cfd",
-    "https://www.patronizle.cfd",
-]
 
 
 def generate_domains():
     domains = []
     for i in range(MIN_NUMBER, MAX_NUMBER + 1):
         domains.append(f"https://{DOMAIN_BASE}{i}.{DOMAIN_TLD}")
-    domains.extend(EXTRA_DOMAINS)
     return domains
 
 
@@ -75,16 +68,16 @@ def find_base_url():
                 return final_url
             else:
                 log.debug(f"  {domain} → {resp.status_code}")
-        except Exception:
-            log.debug(f"  {domain} → bağlantı hatası")
+        except Exception as e:
+            log.debug(f"  {domain} → {e}")
 
     log.warning("⚠️ Çalışan domain bulunamadı, varsayılan kullanılıyor.")
-    return "https://patronizle29.cfd"
+    return f"https://{DOMAIN_BASE}{MIN_NUMBER}.{DOMAIN_TLD}"
 
 
 # ── Ayarlar ───────────────────────────────────────────
 BASE_URL     = find_base_url()
-OUTPUT_FILE  = "playlist1.m3u"
+OUTPUT_FILE  = "playlist.m3u"
 STATS_FILE   = "stats.json"
 CHROMEDRIVER = os.environ.get("CHROMEDRIVER_PATH", "/usr/local/bin/chromedriver")
 CHROME_BIN   = os.environ.get("CHROME_BIN",        "/usr/local/bin/google-chrome")
@@ -95,32 +88,38 @@ log.info(f"🌐 BASE_URL: {BASE_URL}")
 
 # ═══════════════════════════════════════════════════════
 #  TARANACAK SAYFALAR
-#  Format: https://patronizle29.cfd/ch.html?id=KANAL_ID
+#  Format: BASE_URL/ch.html?id=ID
 # ═══════════════════════════════════════════════════════
 PAGES = [
+    # ── Patron TV ─────────────────────────────────────
+    {"slug": "ch.html?id=patron",   "name": "Patron TV",          "group": "Genel"},
+
     # ── beIN Sports ───────────────────────────────────
-    {"slug": "ch.html?id=patron",          "name": "beIN Sports 1",      "group": "Spor"},
-    {"slug": "ch.html?id=b2",          "name": "beIN Sports 2",      "group": "Spor"},
-    {"slug": "ch.html?id=b3",          "name": "beIN Sports 3",      "group": "Spor"},
-    {"slug": "ch.html?id=b4",          "name": "beIN Sports 4",      "group": "Spor"},
-    {"slug": "ch.html?id=b5",          "name": "beIN Sports 5",      "group": "Spor"},
-    {"slug": "ch.html?id=bm1",       "name": "beIN Sports Max 1",  "group": "Spor"},
-    {"slug": "ch.html?id=bm2",       "name": "beIN Sports Max 2",  "group": "Spor"},
+    {"slug": "ch.html?id=patron",       "name": "beIN Sports 1",      "group": "Spor"},
+    {"slug": "ch.html?id=b2",       "name": "beIN Sports 2",      "group": "Spor"},
+    {"slug": "ch.html?id=b3",       "name": "beIN Sports 3",      "group": "Spor"},
+    {"slug": "ch.html?id=b4",       "name": "beIN Sports 4",      "group": "Spor"},
+    {"slug": "ch.html?id=b5",       "name": "beIN Sports 5",      "group": "Spor"},
+    {"slug": "ch.html?id=bm1",      "name": "beIN Sports Max 1",  "group": "Spor"},
+    {"slug": "ch.html?id=bm2",      "name": "beIN Sports Max 2",  "group": "Spor"},
+
     # ── S Sport ───────────────────────────────────────
-    {"slug": "ch.html?id=ss",         "name": "S Sport",            "group": "Spor"},
-    {"slug": "ch.html?id=ss2",        "name": "S Sport 2",          "group": "Spor"},
+    {"slug": "ch.html?id=ss1",      "name": "S Sport",            "group": "Spor"},
+    {"slug": "ch.html?id=ss2",      "name": "S Sport 2",          "group": "Spor"},
+
     # ── Tivibu ────────────────────────────────────────
-    {"slug": "ch.html?id=t1",        "name": "Tivibu Spor 1",      "group": "Spor"},
-    {"slug": "ch.html?id=t2",        "name": "Tivibu Spor 2",      "group": "Spor"},
-    {"slug": "ch.html?id=t3",        "name": "Tivibu Spor 3",      "group": "Spor"},
-    {"slug": "ch.html?id=t4",        "name": "Tivibu Spor 4",      "group": "Spor"},
+    {"slug": "ch.html?id=t1",      "name": "Tivibu Spor 1",      "group": "Spor"},
+    {"slug": "ch.html?id=t2",      "name": "Tivibu Spor 2",      "group": "Spor"},
+    {"slug": "ch.html?id=t3",      "name": "Tivibu Spor 3",      "group": "Spor"},
+    {"slug": "ch.html?id=t4",      "name": "Tivibu Spor 4",      "group": "Spor"},
     # ── TRT ───────────────────────────────────────────
-    {"slug": "ch.html?id=trtspor",        "name": "TRT Spor",           "group": "Spor"},
-    {"slug": "ch.html?id=trtspor2",  "name": "TRT Spor Yıldız",    "group": "Spor"},
+    {"slug": "ch.html?id=trtspor",      "name": "TRT Spor",           "group": "Spor"},
+    {"slug": "ch.html?id=trtspor2",     "name": "TRT Spor Yıldız",    "group": "Spor"},
+
     # ── Diğer ─────────────────────────────────────────
-    {"slug": "ch.html?id=aspor",          "name": "A Spor",             "group": "Spor"},
-    {"slug": "ch.html?id=tv8",            "name": "TV8",                "group": "Genel"},
-    {"slug": "ch.html?id=tv85",           "name": "TV8,5",              "group": "Genel"},
+    {"slug": "ch.html?id=as",       "name": "A Spor",             "group": "Spor"},
+    {"slug": "ch.html?id=tv8",      "name": "TV8",                "group": "Genel"},
+    {"slug": "ch.html?id=tv85",     "name": "TV8,5",              "group": "Genel"},
 ]
 
 
@@ -134,7 +133,7 @@ try:
 except ImportError:
     from selenium import webdriver
     WIRE = False
-    log.warning("⚠️ SeleniumWire yok, normal Selenium kullanılıyor")
+    log.warning("⚠️ SeleniumWire yok")
 
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
@@ -207,7 +206,7 @@ def get_driver():
 
 
 # ═══════════════════════════════════════════════════════
-#  POPUP / REKLAM KAPAT
+#  POPUP KAPAT
 # ═══════════════════════════════════════════════════════
 def close_popups(driver):
     selectors = [
@@ -256,7 +255,6 @@ def click_play(driver):
         except Exception:
             pass
 
-    # JS ile video başlat
     try:
         driver.execute_script("""
             document.querySelectorAll('video').forEach(function(v) {
@@ -285,17 +283,14 @@ def handle_iframes(driver):
                 driver.switch_to.frame(iframe)
                 time.sleep(1)
 
-                # iframe içinde play bas
                 click_play(driver)
                 time.sleep(2)
 
-                # iframe içinde JS ara
                 result = find_in_js(driver)
                 if result:
                     driver.switch_to.default_content()
                     return result
 
-                # iframe içinde HTML ara
                 result = find_in_source(driver.page_source)
                 if result:
                     driver.switch_to.default_content()
@@ -324,7 +319,6 @@ def find_in_js(driver):
         result = driver.execute_script("""
             var found = null;
 
-            // Video / source elementleri
             document.querySelectorAll('video, source').forEach(function(el) {
                 if (!found && el.src && el.src.toLowerCase().indexOf('.m3u8') !== -1)
                     found = el.src;
@@ -333,7 +327,6 @@ def find_in_js(driver):
             });
             if (found) return found;
 
-            // JW Player
             try {
                 var jw = jwplayer();
                 var item = jw.getPlaylistItem();
@@ -346,7 +339,6 @@ def find_in_js(driver):
                 }
             } catch(e) {}
 
-            // Video.js
             try {
                 var vjs = videojs.getPlayers();
                 for (var k in vjs) {
@@ -356,16 +348,17 @@ def find_in_js(driver):
                 }
             } catch(e) {}
 
-            // Hls.js
             try {
                 if (window.hls && window.hls.url && window.hls.url.indexOf('.m3u8') !== -1)
                     return window.hls.url;
             } catch(e) {}
 
-            // window._streamUrl gibi custom değişkenler
             try {
-                var keys = ['streamUrl','stream_url','hlsUrl','hls_url',
-                            'videoUrl','video_url','src','source','file'];
+                var keys = [
+                    'streamUrl', 'stream_url', 'hlsUrl', 'hls_url',
+                    'videoUrl',  'video_url',  'src',    'source',
+                    'file',      'playerSrc',  'liveSrc','liveUrl'
+                ];
                 for (var i = 0; i < keys.length; i++) {
                     if (window[keys[i]] && typeof window[keys[i]] === 'string'
                         && window[keys[i]].indexOf('.m3u8') !== -1)
@@ -373,7 +366,6 @@ def find_in_js(driver):
                 }
             } catch(e) {}
 
-            // HTML regex
             var m = document.documentElement.innerHTML.match(
                 /https?:\\/\\/[^\\s'"<>]+\\.m3u8(?:\\?[^\\s'"<>]*)?/i
             );
@@ -388,7 +380,7 @@ def find_in_js(driver):
 
 
 # ═══════════════════════════════════════════════════════
-#  HTML KAYNAĞINDAN M3U8 BUL
+#  HTML'DEN M3U8 BUL
 # ═══════════════════════════════════════════════════════
 def find_in_source(html):
     match = re.search(
@@ -417,14 +409,12 @@ def scrape_page(driver, page):
     log.info(f"   URL : {url}")
     log.info(f"{'─'*55}")
 
-    # Önceki istekleri temizle
     if WIRE:
         try:
             del driver.requests
         except Exception:
             pass
 
-    # Sayfayı yükle
     try:
         driver.get(url)
         WebDriverWait(driver, 15).until(
@@ -434,17 +424,13 @@ def scrape_page(driver, page):
         log.warning(f"  ⚠️ Sayfa yükleme: {e}")
 
     time.sleep(2)
-
-    # Popup kapat
     close_popups(driver)
-
-    # Play bas
     click_play(driver)
     time.sleep(2)
 
     m3u8_url = None
 
-    # ── 1. SeleniumWire Network ────────────────────────
+    # 1. SeleniumWire
     if WIRE:
         log.info(f"  📡 Network izleniyor ({STREAM_WAIT}s)...")
         for elapsed in range(STREAM_WAIT):
@@ -459,22 +445,21 @@ def scrape_page(driver, page):
     else:
         time.sleep(STREAM_WAIT)
 
-    # ── 2. JS ──────────────────────────────────────────
+    # 2. JS
     if not m3u8_url:
         log.info("  🔎 JS ile aranıyor...")
         m3u8_url = find_in_js(driver)
 
-    # ── 3. iframe ─────────────────────────────────────
+    # 3. iframe
     if not m3u8_url:
         log.info("  🖼️  iframe içinde aranıyor...")
         m3u8_url = handle_iframes(driver)
 
-    # ── 4. HTML Kaynak ────────────────────────────────
+    # 4. HTML
     if not m3u8_url:
         log.info("  📄 HTML kaynağında aranıyor...")
         m3u8_url = find_in_source(driver.page_source)
 
-    # Sonuç
     if m3u8_url:
         log.info(f"  ✅ BULUNDU → {m3u8_url}")
     else:
@@ -484,7 +469,7 @@ def scrape_page(driver, page):
 
 
 # ═══════════════════════════════════════════════════════
-#  M3U PLAYLIST OLUŞTUR
+#  M3U OLUŞTUR
 # ═══════════════════════════════════════════════════════
 def create_m3u(channels):
     now   = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -553,12 +538,10 @@ def main():
     log.info(f"⏱️  Süre    : {elapsed}s")
     log.info(f"{'='*55}")
 
-    # Playlist kaydet
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         f.write(create_m3u(channels))
     log.info(f"✅ {OUTPUT_FILE} kaydedildi")
 
-    # İstatistik kaydet
     with open(STATS_FILE, "w", encoding="utf-8") as f:
         json.dump({
             "site"           : "patronizle",
@@ -571,7 +554,7 @@ def main():
     log.info(f"✅ {STATS_FILE} kaydedildi")
 
     if not channels:
-        log.warning("⚠️ Hiç M3U8 bulunamadı! PAGES listesindeki id'leri kontrol edin.")
+        log.warning("⚠️ Hiç M3U8 bulunamadı!")
 
 
 if __name__ == "__main__":
