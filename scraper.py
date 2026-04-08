@@ -435,7 +435,6 @@ https://atomsportv497.top
 https://atomsportv498.top
 https://atomsportv499.top
 https://atomsportv500.top
-+ EXTRA_DOMAINS'dekiler
-```
+
 
 Aktif olana kadar sırayla dener, ilk 200 dönen domain'i seçer ✅
