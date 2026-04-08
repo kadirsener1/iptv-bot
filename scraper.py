@@ -31,7 +31,7 @@ OUTPUT_FILE  = "playlist.m3u"
 STATS_FILE   = "stats.json"
 CHROMEDRIVER = os.environ.get("CHROMEDRIVER_PATH", "/usr/local/bin/chromedriver")
 CHROME_BIN   = os.environ.get("CHROME_BIN", "/usr/local/bin/google-chrome")
-STREAM_WAIT  = 8
+STREAM_WAIT  = 5
 
 # ── Taranacak Sayfalar ────────────────────────────────
 PAGES = [
