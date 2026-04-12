@@ -1,0 +1,128 @@
+2026-04-12 02:08:21,567 [INFO] 🔎 Domain aralığı taranıyor: atomsportv490.top - atomsportv520.top
+2026-04-12 02:08:23,253 [INFO]   ✅ Aktif domain bulundu: https://atomsportv496.top
+2026-04-12 02:08:23,255 [INFO] 🌐 Kullanılan BASE_URL: https://atomsportv496.top
+2026-04-12 02:08:24,769 [INFO] ✅ SeleniumWire aktif
+2026-04-12 02:08:24,770 [INFO] =======================================================
+2026-04-12 02:08:24,770 [INFO]    M3U8 Scraper
+2026-04-12 02:08:24,770 [INFO]    Base URL : https://atomsportv496.top
+2026-04-12 02:08:24,770 [INFO]    Toplam   : 12 sayfa
+2026-04-12 02:08:24,770 [INFO] =======================================================
+2026-04-12 02:08:24,771 [INFO] 🔧 Driver başlatılıyor...
+2026-04-12 02:08:25,490 [INFO] ✅ Driver başlatıldı
+2026-04-12 02:08:25,490 [INFO] 
+[1/12]
+2026-04-12 02:08:25,490 [INFO] 
+──────────────────────────────────────────────────
+2026-04-12 02:08:25,490 [INFO] 🔍 beIN Sports 1 → https://atomsportv496.top/matches?id=bein-sports-1
+2026-04-12 02:08:25,491 [INFO] ──────────────────────────────────────────────────
+2026-04-12 02:08:57,631 [INFO]   📡 M3U8 bekleniyor (max 8s)...
+2026-04-12 02:08:57,638 [INFO]   🎯 1s'de bulundu: https://tiny-firefly-ba72.amsansak.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-11.m3u8
+2026-04-12 02:08:57,639 [INFO]   ✅ beIN Sports 1: https://tiny-firefly-ba72.amsansak.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-11.m3u8
+2026-04-12 02:08:58,639 [INFO] 
+[2/12]
+2026-04-12 02:08:58,639 [INFO] 
+──────────────────────────────────────────────────
+2026-04-12 02:08:58,639 [INFO] 🔍 beIN Sports 2 → https://atomsportv496.top/matches?id=bein-sports-2
+2026-04-12 02:08:58,639 [INFO] ──────────────────────────────────────────────────
+2026-04-12 02:09:30,641 [INFO]   📡 M3U8 bekleniyor (max 8s)...
+2026-04-12 02:09:30,655 [INFO]   🎯 1s'de bulundu: https://tiny-firefly-ba72.amsansak.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-11.m3u8
+2026-04-12 02:09:30,657 [INFO]   ✅ beIN Sports 2: https://tiny-firefly-ba72.amsansak.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-11.m3u8
+2026-04-12 02:09:31,657 [INFO] 
+[3/12]
+2026-04-12 02:09:31,657 [INFO] 
+──────────────────────────────────────────────────
+2026-04-12 02:09:31,657 [INFO] 🔍 beIN Sports 3 → https://atomsportv496.top/matches?id=bein-sports-3
+2026-04-12 02:09:31,657 [INFO] ──────────────────────────────────────────────────
+2026-04-12 02:10:03,672 [INFO]   📡 M3U8 bekleniyor (max 8s)...
+2026-04-12 02:10:03,682 [INFO]   🎯 1s'de bulundu: https://tiny-firefly-ba72.amsansak.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-3.m3u8
+2026-04-12 02:10:03,682 [INFO]   ✅ beIN Sports 3: https://tiny-firefly-ba72.amsansak.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-3.m3u8
+2026-04-12 02:10:04,682 [INFO] 
+[4/12]
+2026-04-12 02:10:04,682 [INFO] 
+──────────────────────────────────────────────────
+2026-04-12 02:10:04,683 [INFO] 🔍 beIN Sports 4 → https://atomsportv496.top/matches?id=bein-sports-4
+2026-04-12 02:10:04,683 [INFO] ──────────────────────────────────────────────────
+2026-04-12 02:10:36,638 [INFO]   📡 M3U8 bekleniyor (max 8s)...
+2026-04-12 02:10:36,643 [INFO]   🎯 1s'de bulundu: https://tiny-firefly-ba72.amsansak.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-4.m3u8
+2026-04-12 02:10:36,644 [INFO]   ✅ beIN Sports 4: https://tiny-firefly-ba72.amsansak.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-4.m3u8
+2026-04-12 02:10:37,644 [INFO] 
+[5/12]
+2026-04-12 02:10:37,645 [INFO] 
+──────────────────────────────────────────────────
+2026-04-12 02:10:37,645 [INFO] 🔍 beIN Sports 5 → https://atomsportv496.top/matches?id=bein-sports-5
+2026-04-12 02:10:37,645 [INFO] ──────────────────────────────────────────────────
+2026-04-12 02:11:09,660 [INFO]   📡 M3U8 bekleniyor (max 8s)...
+2026-04-12 02:11:09,674 [INFO]   🎯 1s'de bulundu: https://tiny-firefly-ba72.amsansak.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-5.m3u8
+2026-04-12 02:11:09,675 [INFO]   ✅ beIN Sports 5: https://tiny-firefly-ba72.amsansak.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-5.m3u8
+2026-04-12 02:11:10,675 [INFO] 
+[6/12]
+2026-04-12 02:11:10,676 [INFO] 
+──────────────────────────────────────────────────
+2026-04-12 02:11:10,676 [INFO] 🔍 beIN Sports Max 1 → https://atomsportv496.top/matches?id=bein-sports-max-1
+2026-04-12 02:11:10,676 [INFO] ──────────────────────────────────────────────────
+2026-04-12 02:11:42,636 [INFO]   📡 M3U8 bekleniyor (max 8s)...
+2026-04-12 02:11:42,640 [INFO]   🎯 1s'de bulundu: https://tiny-firefly-ba72.amsansak.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-max-1.m3u8
+2026-04-12 02:11:42,640 [INFO]   ✅ beIN Sports Max 1: https://tiny-firefly-ba72.amsansak.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-max-1.m3u8
+2026-04-12 02:11:43,641 [INFO] 
+[7/12]
+2026-04-12 02:11:43,641 [INFO] 
+──────────────────────────────────────────────────
+2026-04-12 02:11:43,641 [INFO] 🔍 beIN Sports Max 2 → https://atomsportv496.top/matches?id=bein-sports-max-2
+2026-04-12 02:11:43,641 [INFO] ──────────────────────────────────────────────────
+2026-04-12 02:12:15,657 [INFO]   📡 M3U8 bekleniyor (max 8s)...
+2026-04-12 02:12:15,668 [INFO]   🎯 1s'de bulundu: https://tiny-firefly-ba72.amsansak.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-max-2.m3u8
+2026-04-12 02:12:15,669 [INFO]   ✅ beIN Sports Max 2: https://tiny-firefly-ba72.amsansak.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-max-2.m3u8
+2026-04-12 02:12:16,669 [INFO] 
+[8/12]
+2026-04-12 02:12:16,670 [INFO] 
+──────────────────────────────────────────────────
+2026-04-12 02:12:16,670 [INFO] 🔍 S Sport → https://atomsportv496.top/matches?id=s-sport
+2026-04-12 02:12:16,670 [INFO] ──────────────────────────────────────────────────
+2026-04-12 02:12:48,697 [INFO]   📡 M3U8 bekleniyor (max 8s)...
+2026-04-12 02:12:48,732 [INFO]   🎯 1s'de bulundu: https://tiny-firefly-ba72.amsansak.workers.dev/https://corestream.ronaldovurdu.help//hls/s-sport.m3u8
+2026-04-12 02:12:48,735 [INFO]   ✅ S Sport: https://tiny-firefly-ba72.amsansak.workers.dev/https://corestream.ronaldovurdu.help//hls/s-sport.m3u8
+2026-04-12 02:12:49,735 [INFO] 
+[9/12]
+2026-04-12 02:12:49,735 [INFO] 
+──────────────────────────────────────────────────
+2026-04-12 02:12:49,735 [INFO] 🔍 S Sport 2 → https://atomsportv496.top/matches?id=s-sport-2
+2026-04-12 02:12:49,735 [INFO] ──────────────────────────────────────────────────
+2026-04-12 02:13:21,700 [INFO]   📡 M3U8 bekleniyor (max 8s)...
+2026-04-12 02:13:21,708 [INFO]   🎯 1s'de bulundu: https://tiny-firefly-ba72.amsansak.workers.dev/https://corestream.ronaldovurdu.help//hls/s-sport-2.m3u8
+2026-04-12 02:13:21,709 [INFO]   ✅ S Sport 2: https://tiny-firefly-ba72.amsansak.workers.dev/https://corestream.ronaldovurdu.help//hls/s-sport-2.m3u8
+2026-04-12 02:13:22,709 [INFO] 
+[10/12]
+2026-04-12 02:13:22,709 [INFO] 
+──────────────────────────────────────────────────
+2026-04-12 02:13:22,709 [INFO] 🔍 Tivibu Spor 1 → https://atomsportv496.top/matches?id=tivibu-spor-1
+2026-04-12 02:13:22,709 [INFO] ──────────────────────────────────────────────────
+2026-04-12 02:13:54,644 [INFO]   📡 M3U8 bekleniyor (max 8s)...
+2026-04-12 02:13:54,645 [INFO]   🎯 1s'de bulundu: https://tiny-firefly-ba72.amsansak.workers.dev/https://corestream.ronaldovurdu.help//hls/tivibu-spor-1.m3u8
+2026-04-12 02:13:54,645 [INFO]   ✅ Tivibu Spor 1: https://tiny-firefly-ba72.amsansak.workers.dev/https://corestream.ronaldovurdu.help//hls/tivibu-spor-1.m3u8
+2026-04-12 02:13:55,645 [INFO] 
+[11/12]
+2026-04-12 02:13:55,645 [INFO] 
+──────────────────────────────────────────────────
+2026-04-12 02:13:55,645 [INFO] 🔍 Tivibu Spor 2 → https://atomsportv496.top/matches?id=tivibu-spor-2
+2026-04-12 02:13:55,645 [INFO] ──────────────────────────────────────────────────
+2026-04-12 02:14:27,674 [INFO]   📡 M3U8 bekleniyor (max 8s)...
+2026-04-12 02:14:27,682 [INFO]   🎯 1s'de bulundu: https://tiny-firefly-ba72.amsansak.workers.dev/https://corestream.ronaldovurdu.help//hls/tivibu-spor-2.m3u8
+2026-04-12 02:14:27,683 [INFO]   ✅ Tivibu Spor 2: https://tiny-firefly-ba72.amsansak.workers.dev/https://corestream.ronaldovurdu.help//hls/tivibu-spor-2.m3u8
+2026-04-12 02:14:28,683 [INFO] 
+[12/12]
+2026-04-12 02:14:28,683 [INFO] 
+──────────────────────────────────────────────────
+2026-04-12 02:14:28,683 [INFO] 🔍 Tivibu Spor 3 → https://atomsportv496.top/matches?id=tivibu-spor-3
+2026-04-12 02:14:28,683 [INFO] ──────────────────────────────────────────────────
+2026-04-12 02:15:00,661 [INFO]   📡 M3U8 bekleniyor (max 8s)...
+2026-04-12 02:15:00,662 [INFO]   🎯 1s'de bulundu: https://tiny-firefly-ba72.amsansak.workers.dev/https://corestream.ronaldovurdu.help//hls/tivibu-spor-3.m3u8
+2026-04-12 02:15:00,662 [INFO]   ✅ Tivibu Spor 3: https://tiny-firefly-ba72.amsansak.workers.dev/https://corestream.ronaldovurdu.help//hls/tivibu-spor-3.m3u8
+2026-04-12 02:15:01,726 [INFO] 🔒 Driver kapatıldı
+2026-04-12 02:15:01,726 [INFO] 
+=======================================================
+2026-04-12 02:15:01,726 [INFO] 🏁 Tamamlandı!
+2026-04-12 02:15:01,727 [INFO] 📺 Kanal : 12/12
+2026-04-12 02:15:01,727 [INFO] ⏱️  Süre  : 397.0s
+2026-04-12 02:15:01,727 [INFO] =======================================================
+2026-04-12 02:15:01,727 [INFO] ✅ playlist.m3u kaydedildi
+2026-04-12 02:15:01,727 [INFO] ✅ stats.json kaydedildi
