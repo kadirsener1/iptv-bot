@@ -1,7 +1,7 @@
 {
-  "last_update": "2026-04-15T02:11:00.280478",
+  "last_update": "2026-04-15T06:25:55.034793",
   "total_channels": 12,
-  "duration_sec": 398.4,
+  "duration_sec": 437.8,
   "base_url": "https://atomsportv496.top",
   "channels": [
     {
@@ -11,12 +11,12 @@
     },
     {
       "name": "beIN Sports 2",
-      "url": "https://hlsssssss.amgtmeme.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-11.m3u8",
+      "url": "https://hlsssssss.amgtmeme.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-2.m3u8",
       "group": "Spor"
     },
     {
       "name": "beIN Sports 3",
-      "url": "https://hlsssssss.amgtmeme.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-2.m3u8",
+      "url": "https://hlsssssss.amgtmeme.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-3.m3u8",
       "group": "Spor"
     },
     {
@@ -36,7 +36,7 @@
     },
     {
       "name": "beIN Sports Max 2",
-      "url": "https://hlsssssss.amgtmeme.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-max-1.m3u8",
+      "url": "https://hlsssssss.amgtmeme.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-max-2.m3u8",
       "group": "Spor"
     },
     {
@@ -46,7 +46,7 @@
     },
     {
       "name": "S Sport 2",
-      "url": "https://hlsssssss.amgtmeme.workers.dev/https://corestream.ronaldovurdu.help//hls/s-sport.m3u8",
+      "url": "https://hlsssssss.amgtmeme.workers.dev/https://corestream.ronaldovurdu.help//hls/s-sport-2.m3u8",
       "group": "Spor"
     },
     {
