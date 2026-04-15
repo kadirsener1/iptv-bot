@@ -1,0 +1,136 @@
+2026-04-15 21:55:56,367 [INFO] 🔎 Domain aralığı taranıyor: atomsportv490.top - atomsportv520.top
+2026-04-15 21:55:57,720 [INFO]   ✅ Aktif domain bulundu: https://atomsportv497.top
+2026-04-15 21:55:57,722 [INFO] 🌐 Kullanılan BASE_URL: https://atomsportv497.top
+2026-04-15 21:55:58,739 [INFO] ✅ SeleniumWire aktif
+2026-04-15 21:55:58,740 [INFO] =======================================================
+2026-04-15 21:55:58,740 [INFO]    M3U8 Scraper
+2026-04-15 21:55:58,741 [INFO]    Base URL : https://atomsportv497.top
+2026-04-15 21:55:58,741 [INFO]    Toplam   : 13 sayfa
+2026-04-15 21:55:58,741 [INFO] =======================================================
+2026-04-15 21:55:58,741 [INFO] 🔧 Driver başlatılıyor...
+2026-04-15 21:55:59,465 [INFO] ✅ Driver başlatıldı
+2026-04-15 21:55:59,465 [INFO] 
+[1/13]
+2026-04-15 21:55:59,465 [INFO] 
+──────────────────────────────────────────────────
+2026-04-15 21:55:59,466 [INFO] 🔍 beIN Sports 1 → https://atomsportv497.top/matches?id=bein-sports-1
+2026-04-15 21:55:59,466 [INFO] ──────────────────────────────────────────────────
+2026-04-15 21:56:31,709 [INFO]   📡 M3U8 bekleniyor (max 8s)...
+2026-04-15 21:56:31,717 [INFO]   🎯 DOĞRU kanal bulundu: https://hlsssssss.amgtmeme.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-11.m3u8
+2026-04-15 21:56:31,718 [INFO]   ✅ beIN Sports 1: https://hlsssssss.amgtmeme.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-11.m3u8
+2026-04-15 21:56:32,719 [INFO] 
+[2/13]
+2026-04-15 21:56:32,719 [INFO] 
+──────────────────────────────────────────────────
+2026-04-15 21:56:32,719 [INFO] 🔍 beIN Sports 2 → https://atomsportv497.top/matches?id=bein-sports-2
+2026-04-15 21:56:32,719 [INFO] ──────────────────────────────────────────────────
+2026-04-15 21:57:04,921 [INFO]   📡 M3U8 bekleniyor (max 8s)...
+2026-04-15 21:57:04,939 [INFO]   🎯 DOĞRU kanal bulundu: https://hlsssssss.amgtmeme.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-2.m3u8
+2026-04-15 21:57:04,940 [INFO]   ✅ beIN Sports 2: https://hlsssssss.amgtmeme.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-2.m3u8
+2026-04-15 21:57:05,940 [INFO] 
+[3/13]
+2026-04-15 21:57:05,941 [INFO] 
+──────────────────────────────────────────────────
+2026-04-15 21:57:05,941 [INFO] 🔍 beIN Sports 3 → https://atomsportv497.top/matches?id=bein-sports-3
+2026-04-15 21:57:05,941 [INFO] ──────────────────────────────────────────────────
+2026-04-15 21:57:38,155 [INFO]   📡 M3U8 bekleniyor (max 8s)...
+2026-04-15 21:57:38,162 [INFO]   🎯 DOĞRU kanal bulundu: https://hlsssssss.amgtmeme.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-3.m3u8
+2026-04-15 21:57:38,162 [INFO]   ✅ beIN Sports 3: https://hlsssssss.amgtmeme.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-3.m3u8
+2026-04-15 21:57:39,163 [INFO] 
+[4/13]
+2026-04-15 21:57:39,163 [INFO] 
+──────────────────────────────────────────────────
+2026-04-15 21:57:39,163 [INFO] 🔍 beIN Sports 4 → https://atomsportv497.top/matches?id=bein-sports-4
+2026-04-15 21:57:39,163 [INFO] ──────────────────────────────────────────────────
+2026-04-15 21:58:11,102 [INFO]   📡 M3U8 bekleniyor (max 8s)...
+2026-04-15 21:58:11,109 [INFO]   🎯 DOĞRU kanal bulundu: https://hlsssssss.amgtmeme.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-4.m3u8
+2026-04-15 21:58:11,109 [INFO]   ✅ beIN Sports 4: https://hlsssssss.amgtmeme.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-4.m3u8
+2026-04-15 21:58:12,109 [INFO] 
+[5/13]
+2026-04-15 21:58:12,109 [INFO] 
+──────────────────────────────────────────────────
+2026-04-15 21:58:12,109 [INFO] 🔍 beIN Sports 5 → https://atomsportv497.top/matches?id=bein-sports-5
+2026-04-15 21:58:12,109 [INFO] ──────────────────────────────────────────────────
+2026-04-15 21:58:44,061 [INFO]   📡 M3U8 bekleniyor (max 8s)...
+2026-04-15 21:58:44,070 [INFO]   🎯 DOĞRU kanal bulundu: https://hlsssssss.amgtmeme.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-5.m3u8
+2026-04-15 21:58:44,071 [INFO]   ✅ beIN Sports 5: https://hlsssssss.amgtmeme.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-5.m3u8
+2026-04-15 21:58:45,071 [INFO] 
+[6/13]
+2026-04-15 21:58:45,071 [INFO] 
+──────────────────────────────────────────────────
+2026-04-15 21:58:45,071 [INFO] 🔍 beIN Sports Max 1 → https://atomsportv497.top/matches?id=bein-sports-max-1
+2026-04-15 21:58:45,071 [INFO] ──────────────────────────────────────────────────
+2026-04-15 21:59:16,892 [INFO]   📡 M3U8 bekleniyor (max 8s)...
+2026-04-15 21:59:16,902 [INFO]   🎯 DOĞRU kanal bulundu: https://hlsssssss.amgtmeme.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-max-1.m3u8
+2026-04-15 21:59:16,903 [INFO]   ✅ beIN Sports Max 1: https://hlsssssss.amgtmeme.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-max-1.m3u8
+2026-04-15 21:59:17,903 [INFO] 
+[7/13]
+2026-04-15 21:59:17,903 [INFO] 
+──────────────────────────────────────────────────
+2026-04-15 21:59:17,904 [INFO] 🔍 beIN Sports Max 2 → https://atomsportv497.top/matches?id=bein-sports-max-2
+2026-04-15 21:59:17,904 [INFO] ──────────────────────────────────────────────────
+2026-04-15 21:59:49,623 [INFO]   📡 M3U8 bekleniyor (max 8s)...
+2026-04-15 21:59:49,624 [INFO]   🎯 DOĞRU kanal bulundu: https://hlsssssss.amgtmeme.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-max-2.m3u8
+2026-04-15 21:59:49,624 [INFO]   ✅ beIN Sports Max 2: https://hlsssssss.amgtmeme.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-max-2.m3u8
+2026-04-15 21:59:50,625 [INFO] 
+[8/13]
+2026-04-15 21:59:50,625 [INFO] 
+──────────────────────────────────────────────────
+2026-04-15 21:59:50,625 [INFO] 🔍 S Sport → https://atomsportv497.top/matches?id=s-sport
+2026-04-15 21:59:50,625 [INFO] ──────────────────────────────────────────────────
+2026-04-15 22:00:22,889 [INFO]   📡 M3U8 bekleniyor (max 8s)...
+2026-04-15 22:00:22,946 [INFO]   🎯 DOĞRU kanal bulundu: https://hlsssssss.amgtmeme.workers.dev/https://corestream.ronaldovurdu.help//hls/s-sport.m3u8
+2026-04-15 22:00:22,949 [INFO]   ✅ S Sport: https://hlsssssss.amgtmeme.workers.dev/https://corestream.ronaldovurdu.help//hls/s-sport.m3u8
+2026-04-15 22:00:23,949 [INFO] 
+[9/13]
+2026-04-15 22:00:23,950 [INFO] 
+──────────────────────────────────────────────────
+2026-04-15 22:00:23,950 [INFO] 🔍 S Sport 2 → https://atomsportv497.top/matches?id=s-sport-2
+2026-04-15 22:00:23,950 [INFO] ──────────────────────────────────────────────────
+2026-04-15 22:00:55,931 [INFO]   📡 M3U8 bekleniyor (max 8s)...
+2026-04-15 22:00:55,940 [INFO]   🎯 DOĞRU kanal bulundu: https://hlsssssss.amgtmeme.workers.dev/https://corestream.ronaldovurdu.help//hls/s-sport-2.m3u8
+2026-04-15 22:00:55,941 [INFO]   ✅ S Sport 2: https://hlsssssss.amgtmeme.workers.dev/https://corestream.ronaldovurdu.help//hls/s-sport-2.m3u8
+2026-04-15 22:00:56,941 [INFO] 
+[10/13]
+2026-04-15 22:00:56,942 [INFO] 
+──────────────────────────────────────────────────
+2026-04-15 22:00:56,942 [INFO] 🔍 Tivibu Spor 1 → https://atomsportv497.top/matches?id=tivibu-spor-1
+2026-04-15 22:00:56,942 [INFO] ──────────────────────────────────────────────────
+2026-04-15 22:01:28,846 [INFO]   📡 M3U8 bekleniyor (max 8s)...
+2026-04-15 22:01:28,846 [INFO]   🎯 DOĞRU kanal bulundu: https://hlsssssss.amgtmeme.workers.dev/https://corestream.ronaldovurdu.help//hls/tivibu-spor-1.m3u8
+2026-04-15 22:01:28,847 [INFO]   ✅ Tivibu Spor 1: https://hlsssssss.amgtmeme.workers.dev/https://corestream.ronaldovurdu.help//hls/tivibu-spor-1.m3u8
+2026-04-15 22:01:29,847 [INFO] 
+[11/13]
+2026-04-15 22:01:29,847 [INFO] 
+──────────────────────────────────────────────────
+2026-04-15 22:01:29,847 [INFO] 🔍 Tivibu Spor 2 → https://atomsportv497.top/matches?id=tivibu-spor-2
+2026-04-15 22:01:29,847 [INFO] ──────────────────────────────────────────────────
+2026-04-15 22:02:01,810 [INFO]   📡 M3U8 bekleniyor (max 8s)...
+2026-04-15 22:02:01,811 [INFO]   🎯 DOĞRU kanal bulundu: https://hlsssssss.amgtmeme.workers.dev/https://corestream.ronaldovurdu.help//hls/tivibu-spor-2.m3u8
+2026-04-15 22:02:01,811 [INFO]   ✅ Tivibu Spor 2: https://hlsssssss.amgtmeme.workers.dev/https://corestream.ronaldovurdu.help//hls/tivibu-spor-2.m3u8
+2026-04-15 22:02:02,811 [INFO] 
+[12/13]
+2026-04-15 22:02:02,812 [INFO] 
+──────────────────────────────────────────────────
+2026-04-15 22:02:02,812 [INFO] 🔍 Tivibu Spor 3 → https://atomsportv497.top/matches?id=tivibu-spor-3
+2026-04-15 22:02:02,812 [INFO] ──────────────────────────────────────────────────
+2026-04-15 22:02:34,765 [INFO]   📡 M3U8 bekleniyor (max 8s)...
+2026-04-15 22:02:34,766 [INFO]   🎯 DOĞRU kanal bulundu: https://hlsssssss.amgtmeme.workers.dev/https://corestream.ronaldovurdu.help//hls/tivibu-spor-3.m3u8
+2026-04-15 22:02:34,766 [INFO]   ✅ Tivibu Spor 3: https://hlsssssss.amgtmeme.workers.dev/https://corestream.ronaldovurdu.help//hls/tivibu-spor-3.m3u8
+2026-04-15 22:02:35,766 [INFO] 
+[13/13]
+2026-04-15 22:02:35,766 [INFO] 
+──────────────────────────────────────────────────
+2026-04-15 22:02:35,766 [INFO] 🔍 Tivibu Spor 4 → https://atomsportv497.top/matches?id=tivibu-spor-4
+2026-04-15 22:02:35,766 [INFO] ──────────────────────────────────────────────────
+2026-04-15 22:03:07,918 [INFO]   📡 M3U8 bekleniyor (max 8s)...
+2026-04-15 22:03:15,931 [INFO]   ❌ Tivibu Spor 4: M3U8 bulunamadı
+2026-04-15 22:03:16,995 [INFO] 🔒 Driver kapatıldı
+2026-04-15 22:03:16,995 [INFO] 
+=======================================================
+2026-04-15 22:03:16,995 [INFO] 🏁 Tamamlandı!
+2026-04-15 22:03:16,995 [INFO] 📺 Kanal : 12/13
+2026-04-15 22:03:16,995 [INFO] ⏱️  Süre  : 438.3s
+2026-04-15 22:03:16,995 [INFO] =======================================================
+2026-04-15 22:03:16,995 [INFO] ✅ playlist.m3u kaydedildi
+2026-04-15 22:03:16,996 [INFO] ✅ stats.json kaydedildi
