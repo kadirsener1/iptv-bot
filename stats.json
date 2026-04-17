@@ -1,27 +1,67 @@
 {
-  "last_update": "2026-04-17T18:00:44.605396",
-  "total_channels": 4,
-  "duration_sec": 511.7,
-  "base_url": "https://atomsportv497.top",
+  "last_update": "2026-04-17T19:13:09.229257",
+  "total_channels": 12,
+  "duration_sec": 454.6,
+  "base_url": "https://atomsportv498.top",
   "channels": [
     {
       "name": "beIN Sports 1",
-      "url": "https://black-snow-b418.gangasecks.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-11.m3u8",
+      "url": "https://hlssssssssssss.naciyeyildiz7361.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-11.m3u8",
       "group": "Spor"
     },
     {
       "name": "beIN Sports 2",
-      "url": "https://black-snow-b418.gangasecks.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-2.m3u8",
+      "url": "https://hlssssssssssss.naciyeyildiz7361.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-2.m3u8",
       "group": "Spor"
     },
     {
       "name": "beIN Sports 3",
-      "url": "https://black-snow-b418.gangasecks.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-3.m3u8",
+      "url": "https://hlssssssssssss.naciyeyildiz7361.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-3.m3u8",
       "group": "Spor"
     },
     {
       "name": "beIN Sports 4",
-      "url": "https://black-snow-b418.gangasecks.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-4.m3u8",
+      "url": "https://hlssssssssssss.naciyeyildiz7361.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-4.m3u8",
+      "group": "Spor"
+    },
+    {
+      "name": "beIN Sports 5",
+      "url": "https://hlssssssssssss.naciyeyildiz7361.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-5.m3u8",
+      "group": "Spor"
+    },
+    {
+      "name": "beIN Sports Max 1",
+      "url": "https://hlssssssssssss.naciyeyildiz7361.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-max-1.m3u8",
+      "group": "Spor"
+    },
+    {
+      "name": "beIN Sports Max 2",
+      "url": "https://hlssssssssssss.naciyeyildiz7361.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-max-2.m3u8",
+      "group": "Spor"
+    },
+    {
+      "name": "S Sport",
+      "url": "https://hlssssssssssss.naciyeyildiz7361.workers.dev/https://corestream.ronaldovurdu.help//hls/s-sport.m3u8",
+      "group": "Spor"
+    },
+    {
+      "name": "S Sport 2",
+      "url": "https://hlssssssssssss.naciyeyildiz7361.workers.dev/https://corestream.ronaldovurdu.help//hls/s-sport-2.m3u8",
+      "group": "Spor"
+    },
+    {
+      "name": "Tivibu Spor 1",
+      "url": "https://hlssssssssssss.naciyeyildiz7361.workers.dev/https://corestream.ronaldovurdu.help//hls/tivibu-spor-1.m3u8",
+      "group": "Spor"
+    },
+    {
+      "name": "Tivibu Spor 2",
+      "url": "https://hlssssssssssss.naciyeyildiz7361.workers.dev/https://corestream.ronaldovurdu.help//hls/tivibu-spor-2.m3u8",
+      "group": "Spor"
+    },
+    {
+      "name": "Tivibu Spor 3",
+      "url": "https://hlssssssssssss.naciyeyildiz7361.workers.dev/https://corestream.ronaldovurdu.help//hls/tivibu-spor-3.m3u8",
       "group": "Spor"
     }
   ]
