@@ -1,7 +1,7 @@
 {
-  "last_update": "2026-04-17T15:06:46.071068",
-  "total_channels": 12,
-  "duration_sec": 438.7,
+  "last_update": "2026-04-17T16:16:22.836206",
+  "total_channels": 11,
+  "duration_sec": 445.9,
   "base_url": "https://atomsportv497.top",
   "channels": [
     {
@@ -27,11 +27,6 @@
     {
       "name": "beIN Sports 5",
       "url": "https://hlsssssss.amgtmeme.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-5.m3u8",
-      "group": "Spor"
-    },
-    {
-      "name": "beIN Sports Max 1",
-      "url": "https://hlsssssss.amgtmeme.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-max-1.m3u8",
       "group": "Spor"
     },
     {
