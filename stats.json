@@ -1,12 +1,22 @@
 {
-  "last_update": "2026-04-21T17:15:16.118082",
-  "total_channels": 7,
-  "duration_sec": 507.9,
-  "base_url": "https://atomsportv498.top",
+  "last_update": "2026-04-21T19:25:10.380966",
+  "total_channels": 9,
+  "duration_sec": 462.0,
+  "base_url": "https://atomsportv499.top",
   "channels": [
+    {
+      "name": "beIN Sports 1",
+      "url": "https://hlsssssss.neymardacorona.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-11.m3u8",
+      "group": "Spor"
+    },
     {
       "name": "beIN Sports 2",
       "url": "https://hlsssssss.neymardacorona.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-2.m3u8",
+      "group": "Spor"
+    },
+    {
+      "name": "beIN Sports 3",
+      "url": "https://hlsssssss.neymardacorona.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-3.m3u8",
       "group": "Spor"
     },
     {
