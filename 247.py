@@ -86,7 +86,7 @@ log.info(f"🌐 Kullanılan BASE_URL: {BASE_URL}")
 
 # ── Taranacak Sayfalar ────────────────────────────────
 PAGES = [
-    {"slug": "arena-sport-1-premium",  "name": "beIN Sports 1",  "group": "Spor"},
+    {"slug": "embed/arena-sport-2-premium",  "name": "beIN Sports 1",  "group": "Spor"},
     {"slug": "watch/arena-sport-2-premium",  "name": "beIN Sports 2",  "group": "Spor"},
 ]
 
