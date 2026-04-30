@@ -1,7 +1,7 @@
 {
-  "last_update": "2026-04-30T14:10:49.727202",
-  "total_channels": 9,
-  "duration_sec": 460.9,
+  "last_update": "2026-04-30T16:42:23.520537",
+  "total_channels": 8,
+  "duration_sec": 1209.0,
   "base_url": "https://atomsportv500.top",
   "channels": [
     {
@@ -42,11 +42,6 @@
     {
       "name": "S Sport",
       "url": "https://young-surf-88a9.songulcavdar8274.workers.dev/https://corestream.ronaldovurdu.help//hls/s-sport.m3u8",
-      "group": "Spor"
-    },
-    {
-      "name": "S Sport 2",
-      "url": "https://young-surf-88a9.songulcavdar8274.workers.dev/https://corestream.ronaldovurdu.help//hls/s-sport-2.m3u8",
       "group": "Spor"
     }
   ]

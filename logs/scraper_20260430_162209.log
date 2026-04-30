@@ -1,0 +1,193 @@
+2026-04-30 16:22:09,263 [INFO] 🔎 Domain aralığı taranıyor: atomsportv490.top - atomsportv520.top
+2026-04-30 16:22:13,202 [INFO]   ✅ Aktif domain bulundu: https://atomsportv500.top
+2026-04-30 16:22:13,204 [INFO] 🌐 Kullanılan BASE_URL: https://atomsportv500.top
+2026-04-30 16:22:14,522 [INFO] ✅ SeleniumWire aktif
+2026-04-30 16:22:14,524 [INFO] =======================================================
+2026-04-30 16:22:14,524 [INFO]    M3U8 Scraper
+2026-04-30 16:22:14,524 [INFO]    Base URL : https://atomsportv500.top
+2026-04-30 16:22:14,524 [INFO]    Toplam   : 13 sayfa
+2026-04-30 16:22:14,524 [INFO] =======================================================
+2026-04-30 16:22:14,524 [INFO] 🔧 Driver başlatılıyor...
+2026-04-30 16:22:15,268 [INFO] ✅ Driver başlatıldı
+2026-04-30 16:22:15,268 [INFO] 
+[1/13]
+2026-04-30 16:22:15,268 [INFO] 
+──────────────────────────────────────────────────
+2026-04-30 16:22:15,268 [INFO] 🔍 beIN Sports 1 → https://atomsportv500.top/matches?id=bein-sports-1
+2026-04-30 16:22:15,268 [INFO] ──────────────────────────────────────────────────
+2026-04-30 16:22:47,552 [INFO]   📡 M3U8 bekleniyor (max 8s)...
+2026-04-30 16:22:47,553 [INFO]   🎯 DOĞRU kanal bulundu: https://young-surf-88a9.songulcavdar8274.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-11.m3u8
+2026-04-30 16:22:47,553 [INFO]   ✅ beIN Sports 1: https://young-surf-88a9.songulcavdar8274.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-11.m3u8
+2026-04-30 16:22:48,554 [INFO] 
+[2/13]
+2026-04-30 16:22:48,554 [INFO] 
+──────────────────────────────────────────────────
+2026-04-30 16:22:48,554 [INFO] 🔍 beIN Sports 2 → https://atomsportv500.top/matches?id=bein-sports-2
+2026-04-30 16:22:48,554 [INFO] ──────────────────────────────────────────────────
+2026-04-30 16:23:20,671 [INFO]   📡 M3U8 bekleniyor (max 8s)...
+2026-04-30 16:23:20,673 [INFO]   🎯 DOĞRU kanal bulundu: https://young-surf-88a9.songulcavdar8274.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-2.m3u8
+2026-04-30 16:23:20,673 [INFO]   ✅ beIN Sports 2: https://young-surf-88a9.songulcavdar8274.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-2.m3u8
+2026-04-30 16:23:21,673 [INFO] 
+[3/13]
+2026-04-30 16:23:21,674 [INFO] 
+──────────────────────────────────────────────────
+2026-04-30 16:23:21,674 [INFO] 🔍 beIN Sports 3 → https://atomsportv500.top/matches?id=bein-sports-3
+2026-04-30 16:23:21,674 [INFO] ──────────────────────────────────────────────────
+2026-04-30 16:23:54,023 [INFO]   📡 M3U8 bekleniyor (max 8s)...
+2026-04-30 16:23:54,024 [INFO]   🎯 DOĞRU kanal bulundu: https://young-surf-88a9.songulcavdar8274.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-3.m3u8
+2026-04-30 16:23:54,024 [INFO]   ✅ beIN Sports 3: https://young-surf-88a9.songulcavdar8274.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-3.m3u8
+2026-04-30 16:23:55,024 [INFO] 
+[4/13]
+2026-04-30 16:23:55,025 [INFO] 
+──────────────────────────────────────────────────
+2026-04-30 16:23:55,025 [INFO] 🔍 beIN Sports 4 → https://atomsportv500.top/matches?id=bein-sports-4
+2026-04-30 16:23:55,025 [INFO] ──────────────────────────────────────────────────
+2026-04-30 16:24:26,921 [INFO]   📡 M3U8 bekleniyor (max 8s)...
+2026-04-30 16:24:26,921 [INFO]   🎯 DOĞRU kanal bulundu: https://young-surf-88a9.songulcavdar8274.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-4.m3u8
+2026-04-30 16:24:26,922 [INFO]   ✅ beIN Sports 4: https://young-surf-88a9.songulcavdar8274.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-4.m3u8
+2026-04-30 16:24:27,922 [INFO] 
+[5/13]
+2026-04-30 16:24:27,922 [INFO] 
+──────────────────────────────────────────────────
+2026-04-30 16:24:27,922 [INFO] 🔍 beIN Sports 5 → https://atomsportv500.top/matches?id=bein-sports-5
+2026-04-30 16:24:27,922 [INFO] ──────────────────────────────────────────────────
+2026-04-30 16:24:59,860 [INFO]   📡 M3U8 bekleniyor (max 8s)...
+2026-04-30 16:24:59,867 [INFO]   🎯 DOĞRU kanal bulundu: https://young-surf-88a9.songulcavdar8274.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-5.m3u8
+2026-04-30 16:24:59,867 [INFO]   ✅ beIN Sports 5: https://young-surf-88a9.songulcavdar8274.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-5.m3u8
+2026-04-30 16:25:00,867 [INFO] 
+[6/13]
+2026-04-30 16:25:00,868 [INFO] 
+──────────────────────────────────────────────────
+2026-04-30 16:25:00,868 [INFO] 🔍 beIN Sports Max 1 → https://atomsportv500.top/matches?id=bein-sports-max-1
+2026-04-30 16:25:00,868 [INFO] ──────────────────────────────────────────────────
+2026-04-30 16:25:32,792 [INFO]   📡 M3U8 bekleniyor (max 8s)...
+2026-04-30 16:25:32,793 [INFO]   🎯 DOĞRU kanal bulundu: https://young-surf-88a9.songulcavdar8274.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-max-1.m3u8
+2026-04-30 16:25:32,793 [INFO]   ✅ beIN Sports Max 1: https://young-surf-88a9.songulcavdar8274.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-max-1.m3u8
+2026-04-30 16:25:33,793 [INFO] 
+[7/13]
+2026-04-30 16:25:33,793 [INFO] 
+──────────────────────────────────────────────────
+2026-04-30 16:25:33,793 [INFO] 🔍 beIN Sports Max 2 → https://atomsportv500.top/matches?id=bein-sports-max-2
+2026-04-30 16:25:33,793 [INFO] ──────────────────────────────────────────────────
+2026-04-30 16:26:05,723 [INFO]   📡 M3U8 bekleniyor (max 8s)...
+2026-04-30 16:26:05,724 [INFO]   🎯 DOĞRU kanal bulundu: https://young-surf-88a9.songulcavdar8274.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-max-2.m3u8
+2026-04-30 16:26:05,724 [INFO]   ✅ beIN Sports Max 2: https://young-surf-88a9.songulcavdar8274.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-max-2.m3u8
+2026-04-30 16:26:06,724 [INFO] 
+[8/13]
+2026-04-30 16:26:06,724 [INFO] 
+──────────────────────────────────────────────────
+2026-04-30 16:26:06,724 [INFO] 🔍 S Sport → https://atomsportv500.top/matches?id=s-sport
+2026-04-30 16:26:06,725 [INFO] ──────────────────────────────────────────────────
+2026-04-30 16:33:12,345 [INFO]   📡 M3U8 bekleniyor (max 8s)...
+2026-04-30 16:33:12,347 [INFO]   🎯 DOĞRU kanal bulundu: https://young-surf-88a9.songulcavdar8274.workers.dev/https://corestream.ronaldovurdu.help//hls/s-sport.m3u8
+2026-04-30 16:33:12,347 [INFO]   ✅ S Sport: https://young-surf-88a9.songulcavdar8274.workers.dev/https://corestream.ronaldovurdu.help//hls/s-sport.m3u8
+2026-04-30 16:33:13,347 [INFO] 
+[9/13]
+2026-04-30 16:33:13,347 [INFO] 
+──────────────────────────────────────────────────
+2026-04-30 16:33:13,348 [INFO] 🔍 S Sport 2 → https://atomsportv500.top/matches?id=s-sport-2
+2026-04-30 16:33:13,348 [INFO] ──────────────────────────────────────────────────
+2026-04-30 16:33:43,356 [WARNING]   ⚠️ Sayfa yükleme: Message: timeout: Timed out receiving message from renderer: 30.000
+  (Session info: chrome=148.0.7778.97)
+Stacktrace:
+#0 0x556a88e068aa <unknown>
+#1 0x556a888018a9 <unknown>
+#2 0x556a887e8f70 <unknown>
+#3 0x556a887e8b96 <unknown>
+#4 0x556a887e66cb <unknown>
+#5 0x556a887e704f <unknown>
+#6 0x556a887f64d0 <unknown>
+#7 0x556a88810627 <unknown>
+#8 0x556a88817f2b <unknown>
+#9 0x556a887e77b9 <unknown>
+#10 0x556a888103bd <unknown>
+#11 0x556a8889de03 <unknown>
+#12 0x556a888494cf <unknown>
+#13 0x556a8884a291 <unknown>
+#14 0x556a88dcc76b <unknown>
+#15 0x556a88dcf67d <unknown>
+#16 0x556a88db96c8 <unknown>
+#17 0x556a88dd0210 <unknown>
+#18 0x556a88da0170 <unknown>
+#19 0x556a88df37b8 <unknown>
+#20 0x556a88df3955 <unknown>
+#21 0x556a88e0530e <unknown>
+#22 0x7f8862494ac3 <unknown>
+
+2026-04-30 16:41:15,441 [INFO]   📡 M3U8 bekleniyor (max 8s)...
+2026-04-30 16:42:23,454 [ERROR] ❌ Hata: Message: timeout: Timed out receiving message from renderer: 30.000
+  (Session info: chrome=148.0.7778.97)
+Stacktrace:
+#0 0x556a88e068aa <unknown>
+#1 0x556a888018a9 <unknown>
+#2 0x556a887e8f70 <unknown>
+#3 0x556a887e8b96 <unknown>
+#4 0x556a887e66cb <unknown>
+#5 0x556a887e704f <unknown>
+#6 0x556a887f64d0 <unknown>
+#7 0x556a88810627 <unknown>
+#8 0x556a88817f2b <unknown>
+#9 0x556a887e77b9 <unknown>
+#10 0x556a888103bd <unknown>
+#11 0x556a8889de03 <unknown>
+#12 0x556a888494cf <unknown>
+#13 0x556a8884a291 <unknown>
+#14 0x556a88dcc76b <unknown>
+#15 0x556a88dcf67d <unknown>
+#16 0x556a88db96c8 <unknown>
+#17 0x556a88dd0210 <unknown>
+#18 0x556a88da0170 <unknown>
+#19 0x556a88df37b8 <unknown>
+#20 0x556a88df3955 <unknown>
+#21 0x556a88e0530e <unknown>
+#22 0x7f8862494ac3 <unknown>
+Traceback (most recent call last):
+  File "/home/runner/work/atom/atom/scraper.py", line 379, in main
+    m3u8_url = scrape_page(driver, page)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/atom/atom/scraper.py", line 240, in scrape_page
+    m3u8_url = find_in_source(driver.page_source)
+                              ^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/selenium/webdriver/remote/webdriver.py", line 449, in page_source
+    return self.execute(Command.GET_PAGE_SOURCE)["value"]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/selenium/webdriver/remote/webdriver.py", line 348, in execute
+    self.error_handler.check_response(response)
+  File "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/selenium/webdriver/remote/errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: timeout: Timed out receiving message from renderer: 30.000
+  (Session info: chrome=148.0.7778.97)
+Stacktrace:
+#0 0x556a88e068aa <unknown>
+#1 0x556a888018a9 <unknown>
+#2 0x556a887e8f70 <unknown>
+#3 0x556a887e8b96 <unknown>
+#4 0x556a887e66cb <unknown>
+#5 0x556a887e704f <unknown>
+#6 0x556a887f64d0 <unknown>
+#7 0x556a88810627 <unknown>
+#8 0x556a88817f2b <unknown>
+#9 0x556a887e77b9 <unknown>
+#10 0x556a888103bd <unknown>
+#11 0x556a8889de03 <unknown>
+#12 0x556a888494cf <unknown>
+#13 0x556a8884a291 <unknown>
+#14 0x556a88dcc76b <unknown>
+#15 0x556a88dcf67d <unknown>
+#16 0x556a88db96c8 <unknown>
+#17 0x556a88dd0210 <unknown>
+#18 0x556a88da0170 <unknown>
+#19 0x556a88df37b8 <unknown>
+#20 0x556a88df3955 <unknown>
+#21 0x556a88e0530e <unknown>
+#22 0x7f8862494ac3 <unknown>
+
+2026-04-30 16:42:23,519 [INFO] 🔒 Driver kapatıldı
+2026-04-30 16:42:23,519 [INFO] 
+=======================================================
+2026-04-30 16:42:23,519 [INFO] 🏁 Tamamlandı!
+2026-04-30 16:42:23,520 [INFO] 📺 Kanal : 8/13
+2026-04-30 16:42:23,520 [INFO] ⏱️  Süre  : 1209.0s
+2026-04-30 16:42:23,520 [INFO] =======================================================
+2026-04-30 16:42:23,520 [INFO] ✅ playlist.m3u kaydedildi
+2026-04-30 16:42:23,520 [INFO] ✅ stats.json kaydedildi
