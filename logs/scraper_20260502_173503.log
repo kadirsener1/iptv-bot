@@ -1,0 +1,91 @@
+2026-05-02 17:35:03,237 [INFO] 🔎 Domain aralığı taranıyor: atomsportv240.top - atomsportv250.top
+2026-05-02 17:35:08,333 [INFO]   ✅ Aktif domain bulundu: https://tv247us.vip
+2026-05-02 17:35:08,334 [INFO] 🌐 Kullanılan BASE_URL: https://tv247us.vip
+2026-05-02 17:35:09,027 [INFO] ✅ SeleniumWire aktif
+2026-05-02 17:35:09,029 [INFO] =======================================================
+2026-05-02 17:35:09,029 [INFO]    M3U8 Scraper
+2026-05-02 17:35:09,029 [INFO]    Base URL : https://tv247us.vip
+2026-05-02 17:35:09,029 [INFO]    Toplam   : 2 sayfa
+2026-05-02 17:35:09,029 [INFO] =======================================================
+2026-05-02 17:35:09,029 [INFO] 🔧 Driver başlatılıyor...
+2026-05-02 17:35:09,762 [INFO] ✅ Driver başlatıldı
+2026-05-02 17:35:09,762 [INFO] 
+[1/2]
+2026-05-02 17:35:09,762 [INFO] 
+──────────────────────────────────────────────────
+2026-05-02 17:35:09,762 [INFO] 🔍 beIN Sports 1 → https://tv247us.vip/embed/arena-sport-2-premium
+2026-05-02 17:35:09,762 [INFO] ──────────────────────────────────────────────────
+2026-05-02 17:35:39,772 [WARNING]   ⚠️ Sayfa yükleme: Message: timeout: Timed out receiving message from renderer: -0.002
+  (Session info: chrome=148.0.7778.97)
+Stacktrace:
+#0 0x562c034318aa <unknown>
+#1 0x562c02e2c8a9 <unknown>
+#2 0x562c02e13f70 <unknown>
+#3 0x562c02e13b96 <unknown>
+#4 0x562c02e116cb <unknown>
+#5 0x562c02e1204f <unknown>
+#6 0x562c02e214d0 <unknown>
+#7 0x562c02e3b627 <unknown>
+#8 0x562c02e42f2b <unknown>
+#9 0x562c02e127b9 <unknown>
+#10 0x562c02e3b3bd <unknown>
+#11 0x562c02ec8e03 <unknown>
+#12 0x562c02e744cf <unknown>
+#13 0x562c02e75291 <unknown>
+#14 0x562c033f776b <unknown>
+#15 0x562c033fa67d <unknown>
+#16 0x562c033e46c8 <unknown>
+#17 0x562c033fb210 <unknown>
+#18 0x562c033cb170 <unknown>
+#19 0x562c0341e7b8 <unknown>
+#20 0x562c0341e955 <unknown>
+#21 0x562c0343030e <unknown>
+#22 0x7fab6e894ac3 <unknown>
+
+2026-05-02 17:36:11,165 [INFO]   📡 M3U8 bekleniyor (max 8s)...
+2026-05-02 17:36:19,184 [INFO]   ❌ beIN Sports 1: M3U8 bulunamadı
+2026-05-02 17:36:20,184 [INFO] 
+[2/2]
+2026-05-02 17:36:20,184 [INFO] 
+──────────────────────────────────────────────────
+2026-05-02 17:36:20,184 [INFO] 🔍 beIN Sports 2 → https://tv247us.vip/watch/arena-sport-2-premium
+2026-05-02 17:36:20,184 [INFO] ──────────────────────────────────────────────────
+2026-05-02 17:36:50,195 [WARNING]   ⚠️ Sayfa yükleme: Message: timeout: Timed out receiving message from renderer: -0.002
+  (Session info: chrome=148.0.7778.97)
+Stacktrace:
+#0 0x562c034318aa <unknown>
+#1 0x562c02e2c8a9 <unknown>
+#2 0x562c02e13f70 <unknown>
+#3 0x562c02e13b96 <unknown>
+#4 0x562c02e116cb <unknown>
+#5 0x562c02e1204f <unknown>
+#6 0x562c02e214d0 <unknown>
+#7 0x562c02e3b627 <unknown>
+#8 0x562c02e42f2b <unknown>
+#9 0x562c02e127b9 <unknown>
+#10 0x562c02e3b3bd <unknown>
+#11 0x562c02ec8e03 <unknown>
+#12 0x562c02e744cf <unknown>
+#13 0x562c02e75291 <unknown>
+#14 0x562c033f776b <unknown>
+#15 0x562c033fa67d <unknown>
+#16 0x562c033e46c8 <unknown>
+#17 0x562c033fb210 <unknown>
+#18 0x562c033cb170 <unknown>
+#19 0x562c0341e7b8 <unknown>
+#20 0x562c0341e955 <unknown>
+#21 0x562c0343030e <unknown>
+#22 0x7fab6e894ac3 <unknown>
+
+2026-05-02 17:37:21,568 [INFO]   📡 M3U8 bekleniyor (max 8s)...
+2026-05-02 17:37:29,576 [INFO]   ❌ beIN Sports 2: M3U8 bulunamadı
+2026-05-02 17:37:30,639 [INFO] 🔒 Driver kapatıldı
+2026-05-02 17:37:30,639 [INFO] 
+=======================================================
+2026-05-02 17:37:30,639 [INFO] 🏁 Tamamlandı!
+2026-05-02 17:37:30,639 [INFO] 📺 Kanal : 0/2
+2026-05-02 17:37:30,639 [INFO] ⏱️  Süre  : 141.6s
+2026-05-02 17:37:30,639 [INFO] =======================================================
+2026-05-02 17:37:30,639 [INFO] ✅ playlist1.m3u kaydedildi
+2026-05-02 17:37:30,640 [INFO] ✅ stats1.json kaydedildi
+2026-05-02 17:37:30,640 [WARNING] ⚠️ Hiç M3U8 bulunamadı!
