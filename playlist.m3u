@@ -1,6 +1,6 @@
 #EXTM3U
-# Guncelleme: 2026-05-02 00:11:44 UTC
-# Toplam: 9 kanal
+# Guncelleme: 2026-05-02 04:00:48 UTC
+# Toplam: 8 kanal
 
 #EXTINF:-1 tvg-name="beIN Sports 1" group-title="Spor",beIN Sports 1
 https://young-surf-88a9.sonkezveram.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-11.m3u8
@@ -25,7 +25,4 @@ https://young-surf-88a9.sonkezveram.workers.dev/https://corestream.ronaldovurdu.
 
 #EXTINF:-1 tvg-name="S Sport" group-title="Spor",S Sport
 https://young-surf-88a9.sonkezveram.workers.dev/https://corestream.ronaldovurdu.help//hls/s-sport.m3u8
-
-#EXTINF:-1 tvg-name="S Sport 2" group-title="Spor",S Sport 2
-https://young-surf-88a9.sonkezveram.workers.dev/https://corestream.ronaldovurdu.help//hls/s-sport-2.m3u8
 

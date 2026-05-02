@@ -1,7 +1,7 @@
 {
-  "last_update": "2026-05-02T00:11:44.753173",
-  "total_channels": 9,
-  "duration_sec": 460.6,
+  "last_update": "2026-05-02T04:00:48.624558",
+  "total_channels": 8,
+  "duration_sec": 1235.9,
   "base_url": "https://atomsportv501.top",
   "channels": [
     {
@@ -42,11 +42,6 @@
     {
       "name": "S Sport",
       "url": "https://young-surf-88a9.sonkezveram.workers.dev/https://corestream.ronaldovurdu.help//hls/s-sport.m3u8",
-      "group": "Spor"
-    },
-    {
-      "name": "S Sport 2",
-      "url": "https://young-surf-88a9.sonkezveram.workers.dev/https://corestream.ronaldovurdu.help//hls/s-sport-2.m3u8",
       "group": "Spor"
     }
   ]
