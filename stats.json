@@ -1,53 +1,63 @@
 {
-  "last_update": "2026-05-05T18:20:24.141932",
+  "last_update": "2026-05-05T19:47:42.768782",
   "total_channels": 9,
-  "duration_sec": 460.4,
+  "duration_sec": 461.9,
   "base_url": "https://atomsportv501.top",
+  "proxy_prefix": "https://ronaldo.magnitude.workers.dev/?url=",
   "channels": [
     {
       "name": "beIN Sports 1",
       "url": "https://young-surf-88a9.emgetsek.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-11.m3u8",
-      "group": "Spor"
+      "group": "Spor",
+      "proxied_url": "https://ronaldo.magnitude.workers.dev/?url=https://young-surf-88a9.emgetsek.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-11.m3u8"
     },
     {
       "name": "beIN Sports 2",
       "url": "https://young-surf-88a9.emgetsek.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-2.m3u8",
-      "group": "Spor"
+      "group": "Spor",
+      "proxied_url": "https://ronaldo.magnitude.workers.dev/?url=https://young-surf-88a9.emgetsek.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-2.m3u8"
     },
     {
       "name": "beIN Sports 3",
       "url": "https://young-surf-88a9.emgetsek.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-3.m3u8",
-      "group": "Spor"
+      "group": "Spor",
+      "proxied_url": "https://ronaldo.magnitude.workers.dev/?url=https://young-surf-88a9.emgetsek.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-3.m3u8"
     },
     {
       "name": "beIN Sports 4",
       "url": "https://young-surf-88a9.emgetsek.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-4.m3u8",
-      "group": "Spor"
+      "group": "Spor",
+      "proxied_url": "https://ronaldo.magnitude.workers.dev/?url=https://young-surf-88a9.emgetsek.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-4.m3u8"
     },
     {
       "name": "beIN Sports 5",
       "url": "https://young-surf-88a9.emgetsek.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-5.m3u8",
-      "group": "Spor"
+      "group": "Spor",
+      "proxied_url": "https://ronaldo.magnitude.workers.dev/?url=https://young-surf-88a9.emgetsek.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-5.m3u8"
     },
     {
       "name": "beIN Sports Max 1",
       "url": "https://young-surf-88a9.emgetsek.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-max-1.m3u8",
-      "group": "Spor"
+      "group": "Spor",
+      "proxied_url": "https://ronaldo.magnitude.workers.dev/?url=https://young-surf-88a9.emgetsek.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-max-1.m3u8"
     },
     {
       "name": "beIN Sports Max 2",
       "url": "https://young-surf-88a9.emgetsek.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-max-2.m3u8",
-      "group": "Spor"
+      "group": "Spor",
+      "proxied_url": "https://ronaldo.magnitude.workers.dev/?url=https://young-surf-88a9.emgetsek.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-max-2.m3u8"
     },
     {
       "name": "S Sport",
       "url": "https://young-surf-88a9.emgetsek.workers.dev/https://corestream.ronaldovurdu.help//hls/s-sport.m3u8",
-      "group": "Spor"
+      "group": "Spor",
+      "proxied_url": "https://ronaldo.magnitude.workers.dev/?url=https://young-surf-88a9.emgetsek.workers.dev/https://corestream.ronaldovurdu.help//hls/s-sport.m3u8"
     },
     {
       "name": "S Sport 2",
       "url": "https://young-surf-88a9.emgetsek.workers.dev/https://corestream.ronaldovurdu.help//hls/s-sport-2.m3u8",
-      "group": "Spor"
+      "group": "Spor",
+      "proxied_url": "https://ronaldo.magnitude.workers.dev/?url=https://young-surf-88a9.emgetsek.workers.dev/https://corestream.ronaldovurdu.help//hls/s-sport-2.m3u8"
     }
   ]
 }
