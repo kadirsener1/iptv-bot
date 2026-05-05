@@ -26,20 +26,22 @@ logging.getLogger("hpack").setLevel(logging.ERROR)
 logging.getLogger("urllib3").setLevel(logging.ERROR)
 logging.getLogger("selenium").setLevel(logging.ERROR)
 
+# ═══════════════════════════════════════════════════════
+#  PROXY PREFIX
+# ═══════════════════════════════════════════════════════
+PROXY_PREFIX = "https://ronaldo.magnitude.workers.dev/?url="
 
 # ═══════════════════════════════════════════════════════
 #  BASE URL OTOMATİK BUL (ARALIKLI)
 # ═══════════════════════════════════════════════════════
-MIN_NUMBER = 490   # Başlangıç numarası
-MAX_NUMBER = 520   # Bitiş numarası (İhtiyacına göre artırabilirsin)
+MIN_NUMBER = 490
+MAX_NUMBER = 520
 
 def generate_domains():
     """atomsportv490.top ile atomsportv520.top arası otomatik oluşturur"""
     domains = []
     for i in range(MIN_NUMBER, MAX_NUMBER + 1):
         domains.append(f"https://atomsportv{i}.top")
-    
-    # Ekstra bilinen domainler (opsiyonel)
     domains.extend([
         "https://atomsport.top",
         "https://atomsportv.top",
@@ -76,7 +78,7 @@ def find_base_url():
 
 
 # ── Ayarlar ───────────────────────────────────────────
-BASE_URL     = find_base_url()          # ← Otomatik bulunuyor
+BASE_URL     = find_base_url()
 OUTPUT_FILE  = "playlist.m3u"
 STATS_FILE   = "stats.json"
 CHROMEDRIVER = os.environ.get("CHROMEDRIVER_PATH", "/usr/local/bin/chromedriver")
@@ -84,22 +86,23 @@ CHROME_BIN   = os.environ.get("CHROME_BIN", "/usr/local/bin/google-chrome")
 STREAM_WAIT  = 8
 
 log.info(f"🌐 Kullanılan BASE_URL: {BASE_URL}")
+log.info(f"🔗 Proxy Prefix: {PROXY_PREFIX}")
 
 # ── Taranacak Sayfalar ────────────────────────────────
 PAGES = [
-    {"slug": "matches?id=bein-sports-1",  "name": "beIN Sports 1",  "group": "Spor"},
-    {"slug": "matches?id=bein-sports-2",  "name": "beIN Sports 2",  "group": "Spor"},
-    {"slug": "matches?id=bein-sports-3",  "name": "beIN Sports 3",  "group": "Spor"},
-    {"slug": "matches?id=bein-sports-4",  "name": "beIN Sports 4",  "group": "Spor"},
-    {"slug": "matches?id=bein-sports-5",  "name": "beIN Sports 5",  "group": "Spor"},
-    {"slug": "matches?id=bein-sports-max-1",  "name": "beIN Sports Max 1",  "group": "Spor"},
-    {"slug": "matches?id=bein-sports-max-2",  "name": "beIN Sports Max 2",  "group": "Spor"},
-    {"slug": "matches?id=s-sport",  "name": "S Sport",  "group": "Spor"},
-    {"slug": "matches?id=s-sport-2",  "name": "S Sport 2",  "group": "Spor"},
-    {"slug": "matches?id=tivibu-spor-1",  "name": "Tivibu Spor 1",  "group": "Spor"},
-    {"slug": "matches?id=tivibu-spor-2",  "name": "Tivibu Spor 2",  "group": "Spor"},
-    {"slug": "matches?id=tivibu-spor-3",  "name": "Tivibu Spor 3",  "group": "Spor"},
-    {"slug": "matches?id=tivibu-spor-4",  "name": "Tivibu Spor 4",  "group": "Spor"},
+    {"slug": "matches?id=bein-sports-1",     "name": "beIN Sports 1",     "group": "Spor"},
+    {"slug": "matches?id=bein-sports-2",     "name": "beIN Sports 2",     "group": "Spor"},
+    {"slug": "matches?id=bein-sports-3",     "name": "beIN Sports 3",     "group": "Spor"},
+    {"slug": "matches?id=bein-sports-4",     "name": "beIN Sports 4",     "group": "Spor"},
+    {"slug": "matches?id=bein-sports-5",     "name": "beIN Sports 5",     "group": "Spor"},
+    {"slug": "matches?id=bein-sports-max-1", "name": "beIN Sports Max 1", "group": "Spor"},
+    {"slug": "matches?id=bein-sports-max-2", "name": "beIN Sports Max 2", "group": "Spor"},
+    {"slug": "matches?id=s-sport",           "name": "S Sport",           "group": "Spor"},
+    {"slug": "matches?id=s-sport-2",         "name": "S Sport 2",         "group": "Spor"},
+    {"slug": "matches?id=tivibu-spor-1",     "name": "Tivibu Spor 1",     "group": "Spor"},
+    {"slug": "matches?id=tivibu-spor-2",     "name": "Tivibu Spor 2",     "group": "Spor"},
+    {"slug": "matches?id=tivibu-spor-3",     "name": "Tivibu Spor 3",     "group": "Spor"},
+    {"slug": "matches?id=tivibu-spor-4",     "name": "Tivibu Spor 4",     "group": "Spor"},
 ]
 
 
@@ -337,7 +340,7 @@ def find_in_source(html):
 
 
 # ═══════════════════════════════════════════════════════
-#  M3U OLUŞTUR
+#  M3U OLUŞTUR  ← DEĞİŞEN KISIM
 # ═══════════════════════════════════════════════════════
 def create_m3u(channels):
     now   = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -352,7 +355,11 @@ def create_m3u(channels):
         extinf += f' group-title="{ch["group"]}"'
         extinf += f',{ch["name"]}\n'
         lines.append(extinf)
-        lines.append(f'{ch["url"]}\n\n')
+
+        # ── Ham M3U8 URL'nin önüne proxy prefix ekleniyor ──
+        proxied_url = f"{PROXY_PREFIX}{ch['url']}"
+        lines.append(f'{proxied_url}\n\n')
+
     return "".join(lines)
 
 
@@ -362,8 +369,9 @@ def create_m3u(channels):
 def main():
     log.info("=" * 55)
     log.info("   M3U8 Scraper")
-    log.info(f"   Base URL : {BASE_URL}")
-    log.info(f"   Toplam   : {len(PAGES)} sayfa")
+    log.info(f"   Base URL    : {BASE_URL}")
+    log.info(f"   Proxy Prefix: {PROXY_PREFIX}")
+    log.info(f"   Toplam      : {len(PAGES)} sayfa")
     log.info("=" * 55)
 
     start    = time.time()
@@ -381,7 +389,7 @@ def main():
             if m3u8_url and is_m3u8(m3u8_url):
                 channels.append({
                     "name" : page["name"],
-                    "url"  : m3u8_url,
+                    "url"  : m3u8_url,          # Ham URL stats.json'a kaydedilir
                     "group": page["group"],
                 })
 
@@ -405,10 +413,20 @@ def main():
     log.info(f"⏱️  Süre  : {elapsed}s")
     log.info(f"{'='*55}")
 
+    # ── M3U dosyası (proxy prefix'li URL'ler) ──
     content = create_m3u(channels)
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         f.write(content)
-    log.info(f"✅ {OUTPUT_FILE} kaydedildi")
+    log.info(f"✅ {OUTPUT_FILE} kaydedildi (proxy prefix'li)")
+
+    # ── Stats dosyası (ham URL'ler + proxy URL'ler birlikte) ──
+    stats_channels = [
+        {
+            **ch,
+            "proxied_url": f"{PROXY_PREFIX}{ch['url']}"
+        }
+        for ch in channels
+    ]
 
     with open(STATS_FILE, "w", encoding="utf-8") as f:
         json.dump({
@@ -416,7 +434,8 @@ def main():
             "total_channels" : len(channels),
             "duration_sec"   : elapsed,
             "base_url"       : BASE_URL,
-            "channels"       : channels
+            "proxy_prefix"   : PROXY_PREFIX,
+            "channels"       : stats_channels
         }, f, ensure_ascii=False, indent=2)
     log.info(f"✅ {STATS_FILE} kaydedildi")
 
