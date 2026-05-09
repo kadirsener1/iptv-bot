@@ -1,0 +1,134 @@
+2026-05-09 11:57:33,545 [INFO] 🔎 Domain aralığı taranıyor: atomsportv490.top - atomsportv520.top
+2026-05-09 11:57:36,613 [INFO]   ✅ Aktif domain bulundu: https://atomsportv502.top
+2026-05-09 11:57:36,614 [INFO] 🌐 Kullanılan BASE_URL: https://atomsportv502.top
+2026-05-09 11:57:36,615 [INFO] 🔗 Proxy Prefix: https://ronaldo.magnitude.workers.dev/?url=
+2026-05-09 11:57:37,843 [INFO] ✅ SeleniumWire aktif
+2026-05-09 11:57:37,844 [INFO] =======================================================
+2026-05-09 11:57:37,844 [INFO]    M3U8 Scraper
+2026-05-09 11:57:37,844 [INFO]    Base URL    : https://atomsportv502.top
+2026-05-09 11:57:37,844 [INFO]    Proxy Prefix: https://ronaldo.magnitude.workers.dev/?url=
+2026-05-09 11:57:37,844 [INFO]    Toplam      : 13 sayfa
+2026-05-09 11:57:37,845 [INFO] =======================================================
+2026-05-09 11:57:37,845 [INFO] 🔧 Driver başlatılıyor...
+2026-05-09 11:57:38,597 [INFO] ✅ Driver başlatıldı
+2026-05-09 11:57:38,597 [INFO] 
+[1/13]
+2026-05-09 11:57:38,597 [INFO] 
+──────────────────────────────────────────────────
+2026-05-09 11:57:38,597 [INFO] 🔍 beIN Sports 1 → https://atomsportv502.top/matches?id=bein-sports-1
+2026-05-09 11:57:38,597 [INFO] ──────────────────────────────────────────────────
+2026-05-09 11:58:10,956 [INFO]   📡 M3U8 bekleniyor (max 8s)...
+2026-05-09 11:58:10,970 [INFO]   🎯 DOĞRU kanal bulundu: https://young-surf-88a9.emgetsek.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-11.m3u8
+2026-05-09 11:58:10,971 [INFO]   ✅ beIN Sports 1: https://young-surf-88a9.emgetsek.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-11.m3u8
+2026-05-09 11:58:11,971 [INFO] 
+[2/13]
+2026-05-09 11:58:11,971 [INFO] 
+──────────────────────────────────────────────────
+2026-05-09 11:58:11,972 [INFO] 🔍 beIN Sports 2 → https://atomsportv502.top/matches?id=bein-sports-2
+2026-05-09 11:58:11,972 [INFO] ──────────────────────────────────────────────────
+2026-05-09 11:58:44,069 [INFO]   📡 M3U8 bekleniyor (max 8s)...
+2026-05-09 11:58:44,092 [INFO]   🎯 DOĞRU kanal bulundu: https://young-surf-88a9.emgetsek.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-2.m3u8
+2026-05-09 11:58:44,092 [INFO]   ✅ beIN Sports 2: https://young-surf-88a9.emgetsek.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-2.m3u8
+2026-05-09 11:58:45,092 [INFO] 
+[3/13]
+2026-05-09 11:58:45,092 [INFO] 
+──────────────────────────────────────────────────
+2026-05-09 11:58:45,092 [INFO] 🔍 beIN Sports 3 → https://atomsportv502.top/matches?id=bein-sports-3
+2026-05-09 11:58:45,092 [INFO] ──────────────────────────────────────────────────
+2026-05-09 11:59:16,998 [INFO]   📡 M3U8 bekleniyor (max 8s)...
+2026-05-09 11:59:17,003 [INFO]   🎯 DOĞRU kanal bulundu: https://young-surf-88a9.emgetsek.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-3.m3u8
+2026-05-09 11:59:17,003 [INFO]   ✅ beIN Sports 3: https://young-surf-88a9.emgetsek.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-3.m3u8
+2026-05-09 11:59:18,003 [INFO] 
+[4/13]
+2026-05-09 11:59:18,004 [INFO] 
+──────────────────────────────────────────────────
+2026-05-09 11:59:18,004 [INFO] 🔍 beIN Sports 4 → https://atomsportv502.top/matches?id=bein-sports-4
+2026-05-09 11:59:18,004 [INFO] ──────────────────────────────────────────────────
+2026-05-09 11:59:49,851 [INFO]   📡 M3U8 bekleniyor (max 8s)...
+2026-05-09 11:59:49,857 [INFO]   🎯 DOĞRU kanal bulundu: https://young-surf-88a9.emgetsek.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-4.m3u8
+2026-05-09 11:59:49,857 [INFO]   ✅ beIN Sports 4: https://young-surf-88a9.emgetsek.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-4.m3u8
+2026-05-09 11:59:50,858 [INFO] 
+[5/13]
+2026-05-09 11:59:50,858 [INFO] 
+──────────────────────────────────────────────────
+2026-05-09 11:59:50,858 [INFO] 🔍 beIN Sports 5 → https://atomsportv502.top/matches?id=bein-sports-5
+2026-05-09 11:59:50,858 [INFO] ──────────────────────────────────────────────────
+2026-05-09 12:00:22,719 [INFO]   📡 M3U8 bekleniyor (max 8s)...
+2026-05-09 12:00:22,723 [INFO]   🎯 DOĞRU kanal bulundu: https://young-surf-88a9.emgetsek.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-5.m3u8
+2026-05-09 12:00:22,723 [INFO]   ✅ beIN Sports 5: https://young-surf-88a9.emgetsek.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-5.m3u8
+2026-05-09 12:00:23,724 [INFO] 
+[6/13]
+2026-05-09 12:00:23,724 [INFO] 
+──────────────────────────────────────────────────
+2026-05-09 12:00:23,724 [INFO] 🔍 beIN Sports Max 1 → https://atomsportv502.top/matches?id=bein-sports-max-1
+2026-05-09 12:00:23,724 [INFO] ──────────────────────────────────────────────────
+2026-05-09 12:00:55,356 [INFO]   📡 M3U8 bekleniyor (max 8s)...
+2026-05-09 12:01:03,375 [INFO]   ❌ beIN Sports Max 1: M3U8 bulunamadı
+2026-05-09 12:01:04,375 [INFO] 
+[7/13]
+2026-05-09 12:01:04,375 [INFO] 
+──────────────────────────────────────────────────
+2026-05-09 12:01:04,375 [INFO] 🔍 beIN Sports Max 2 → https://atomsportv502.top/matches?id=bein-sports-max-2
+2026-05-09 12:01:04,375 [INFO] ──────────────────────────────────────────────────
+2026-05-09 12:01:36,193 [INFO]   📡 M3U8 bekleniyor (max 8s)...
+2026-05-09 12:01:36,194 [INFO]   🎯 DOĞRU kanal bulundu: https://young-surf-88a9.emgetsek.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-max-2.m3u8
+2026-05-09 12:01:36,194 [INFO]   ✅ beIN Sports Max 2: https://young-surf-88a9.emgetsek.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-max-2.m3u8
+2026-05-09 12:01:37,194 [INFO] 
+[8/13]
+2026-05-09 12:01:37,195 [INFO] 
+──────────────────────────────────────────────────
+2026-05-09 12:01:37,195 [INFO] 🔍 S Sport → https://atomsportv502.top/matches?id=s-sport
+2026-05-09 12:01:37,195 [INFO] ──────────────────────────────────────────────────
+2026-05-09 12:02:09,026 [INFO]   📡 M3U8 bekleniyor (max 8s)...
+2026-05-09 12:02:09,029 [INFO]   🎯 DOĞRU kanal bulundu: https://young-surf-88a9.emgetsek.workers.dev/https://corestream.ronaldovurdu.help//hls/s-sport.m3u8
+2026-05-09 12:02:09,029 [INFO]   ✅ S Sport: https://young-surf-88a9.emgetsek.workers.dev/https://corestream.ronaldovurdu.help//hls/s-sport.m3u8
+2026-05-09 12:02:10,029 [INFO] 
+[9/13]
+2026-05-09 12:02:10,029 [INFO] 
+──────────────────────────────────────────────────
+2026-05-09 12:02:10,029 [INFO] 🔍 S Sport 2 → https://atomsportv502.top/matches?id=s-sport-2
+2026-05-09 12:02:10,029 [INFO] ──────────────────────────────────────────────────
+2026-05-09 12:02:41,880 [INFO]   📡 M3U8 bekleniyor (max 8s)...
+2026-05-09 12:02:41,885 [INFO]   🎯 DOĞRU kanal bulundu: https://young-surf-88a9.emgetsek.workers.dev/https://corestream.ronaldovurdu.help//hls/s-sport-2.m3u8
+2026-05-09 12:02:41,885 [INFO]   ✅ S Sport 2: https://young-surf-88a9.emgetsek.workers.dev/https://corestream.ronaldovurdu.help//hls/s-sport-2.m3u8
+2026-05-09 12:02:42,885 [INFO] 
+[10/13]
+2026-05-09 12:02:42,885 [INFO] 
+──────────────────────────────────────────────────
+2026-05-09 12:02:42,885 [INFO] 🔍 Tivibu Spor 1 → https://atomsportv502.top/matches?id=tivibu-spor-1
+2026-05-09 12:02:42,885 [INFO] ──────────────────────────────────────────────────
+2026-05-09 12:03:14,724 [INFO]   📡 M3U8 bekleniyor (max 8s)...
+2026-05-09 12:03:22,737 [INFO]   ❌ Tivibu Spor 1: M3U8 bulunamadı
+2026-05-09 12:03:23,737 [INFO] 
+[11/13]
+2026-05-09 12:03:23,737 [INFO] 
+──────────────────────────────────────────────────
+2026-05-09 12:03:23,737 [INFO] 🔍 Tivibu Spor 2 → https://atomsportv502.top/matches?id=tivibu-spor-2
+2026-05-09 12:03:23,738 [INFO] ──────────────────────────────────────────────────
+2026-05-09 12:03:55,561 [INFO]   📡 M3U8 bekleniyor (max 8s)...
+2026-05-09 12:04:03,574 [INFO]   ❌ Tivibu Spor 2: M3U8 bulunamadı
+2026-05-09 12:04:04,574 [INFO] 
+[12/13]
+2026-05-09 12:04:04,574 [INFO] 
+──────────────────────────────────────────────────
+2026-05-09 12:04:04,574 [INFO] 🔍 Tivibu Spor 3 → https://atomsportv502.top/matches?id=tivibu-spor-3
+2026-05-09 12:04:04,574 [INFO] ──────────────────────────────────────────────────
+2026-05-09 12:04:36,394 [INFO]   📡 M3U8 bekleniyor (max 8s)...
+2026-05-09 12:04:44,406 [INFO]   ❌ Tivibu Spor 3: M3U8 bulunamadı
+2026-05-09 12:04:45,407 [INFO] 
+[13/13]
+2026-05-09 12:04:45,407 [INFO] 
+──────────────────────────────────────────────────
+2026-05-09 12:04:45,407 [INFO] 🔍 Tivibu Spor 4 → https://atomsportv502.top/matches?id=tivibu-spor-4
+2026-05-09 12:04:45,407 [INFO] ──────────────────────────────────────────────────
+2026-05-09 12:05:17,234 [INFO]   📡 M3U8 bekleniyor (max 8s)...
+2026-05-09 12:05:25,247 [INFO]   ❌ Tivibu Spor 4: M3U8 bulunamadı
+2026-05-09 12:05:26,313 [INFO] 🔒 Driver kapatıldı
+2026-05-09 12:05:26,313 [INFO] 
+=======================================================
+2026-05-09 12:05:26,313 [INFO] 🏁 Tamamlandı!
+2026-05-09 12:05:26,313 [INFO] 📺 Kanal : 8/13
+2026-05-09 12:05:26,313 [INFO] ⏱️  Süre  : 468.5s
+2026-05-09 12:05:26,313 [INFO] =======================================================
+2026-05-09 12:05:26,313 [INFO] ✅ playlist.m3u kaydedildi (proxy prefix'li)
+2026-05-09 12:05:26,314 [INFO] ✅ stats.json kaydedildi
