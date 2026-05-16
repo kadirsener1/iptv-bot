@@ -34,11 +34,11 @@ PROXY_PREFIX = "https://ronaldo.magnitude.workers.dev/?url="
 # ═══════════════════════════════════════════════════════
 #  BASE URL OTOMATİK BUL (ARALIKLI)
 # ═══════════════════════════════════════════════════════
-MIN_NUMBER = 490
-MAX_NUMBER = 520
+MIN_NUMBER = 503
+MAX_NUMBER = 535
 
 def generate_domains():
-    """atomsportv490.top ile atomsportv520.top arası otomatik oluşturur"""
+    """atomsportv503.top ile atomsportv520.top arası otomatik oluşturur"""
     domains = []
     for i in range(MIN_NUMBER, MAX_NUMBER + 1):
         domains.append(f"https://atomsportv{i}.top")
