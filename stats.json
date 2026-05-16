@@ -1,16 +1,10 @@
 {
-  "last_update": "2026-05-16T00:07:07.593520",
-  "total_channels": 8,
-  "duration_sec": 468.4,
+  "last_update": "2026-05-16T04:02:20.079246",
+  "total_channels": 7,
+  "duration_sec": 476.5,
   "base_url": "https://atomsportv503.top",
   "proxy_prefix": "https://ronaldo.magnitude.workers.dev/?url=",
   "channels": [
-    {
-      "name": "beIN Sports 1",
-      "url": "https://hlssssssssssssssssss.sevinccaglayan6384.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-11.m3u8",
-      "group": "Spor",
-      "proxied_url": "https://ronaldo.magnitude.workers.dev/?url=https://hlssssssssssssssssss.sevinccaglayan6384.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-11.m3u8"
-    },
     {
       "name": "beIN Sports 2",
       "url": "https://hlssssssssssssssssss.sevinccaglayan6384.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-2.m3u8",
@@ -43,9 +37,9 @@
     },
     {
       "name": "S Sport",
-      "url": "https://hlssssssssssssssssss.sevinccaglayan6384.workers.dev/https://corestream.ronaldovurdu.help//hls/s-sport.m3u8",
+      "url": "https://hlssssssssssssssssss.sevinccaglayan6384.workers.dev/https://corestream.ronaldovurdu.help//s-sport/tracks-v1a1/mono.m3u8",
       "group": "Spor",
-      "proxied_url": "https://ronaldo.magnitude.workers.dev/?url=https://hlssssssssssssssssss.sevinccaglayan6384.workers.dev/https://corestream.ronaldovurdu.help//hls/s-sport.m3u8"
+      "proxied_url": "https://ronaldo.magnitude.workers.dev/?url=https://hlssssssssssssssssss.sevinccaglayan6384.workers.dev/https://corestream.ronaldovurdu.help//s-sport/tracks-v1a1/mono.m3u8"
     },
     {
       "name": "S Sport 2",

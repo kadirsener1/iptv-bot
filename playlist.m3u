@@ -1,9 +1,6 @@
 #EXTM3U
-# Guncelleme: 2026-05-16 00:07:07 UTC
-# Toplam: 8 kanal
-
-#EXTINF:-1 tvg-name="beIN Sports 1" group-title="Spor",beIN Sports 1
-https://ronaldo.magnitude.workers.dev/?url=https://hlssssssssssssssssss.sevinccaglayan6384.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-11.m3u8
+# Guncelleme: 2026-05-16 04:02:20 UTC
+# Toplam: 7 kanal
 
 #EXTINF:-1 tvg-name="beIN Sports 2" group-title="Spor",beIN Sports 2
 https://ronaldo.magnitude.workers.dev/?url=https://hlssssssssssssssssss.sevinccaglayan6384.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-2.m3u8
@@ -21,7 +18,7 @@ https://ronaldo.magnitude.workers.dev/?url=https://hlssssssssssssssssss.sevincca
 https://ronaldo.magnitude.workers.dev/?url=https://hlssssssssssssssssss.sevinccaglayan6384.workers.dev/https://corestream.ronaldovurdu.help//hls/bein-sports-max-2.m3u8
 
 #EXTINF:-1 tvg-name="S Sport" group-title="Spor",S Sport
-https://ronaldo.magnitude.workers.dev/?url=https://hlssssssssssssssssss.sevinccaglayan6384.workers.dev/https://corestream.ronaldovurdu.help//hls/s-sport.m3u8
+https://ronaldo.magnitude.workers.dev/?url=https://hlssssssssssssssssss.sevinccaglayan6384.workers.dev/https://corestream.ronaldovurdu.help//s-sport/tracks-v1a1/mono.m3u8
 
 #EXTINF:-1 tvg-name="S Sport 2" group-title="Spor",S Sport 2
 https://ronaldo.magnitude.workers.dev/?url=https://hlssssssssssssssssss.sevinccaglayan6384.workers.dev/https://corestream.ronaldovurdu.help//hls/s-sport-2.m3u8
