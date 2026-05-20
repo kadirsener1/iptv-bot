@@ -2,7 +2,7 @@ name: 🔄 M3U8 Playlist Güncelle
 
 on:
   schedule:
-    - cron: '0 * * * *'
+    - cron: '*/31 * * * *'
   workflow_dispatch:
   push:
     branches:
